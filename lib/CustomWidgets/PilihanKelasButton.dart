@@ -10,7 +10,7 @@ class PilihanKelasButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/absensi2');
+        Navigator.pushNamed(context, '/absensi2', arguments: kelas);
       },
       child: Container(
         margin: EdgeInsets.only(top: 16),

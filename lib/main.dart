@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/absensi': (context) => const Absensi1_PilihKelas(),
-        '/absensi2': (context) => const Absensi2_Absensi()
+        '/absensi2': (context) => Absensi2_Absensi()
       },
     );
   }

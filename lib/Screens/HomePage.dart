@@ -116,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         MainMenuButtons('Pulang', 'izin-pulang', '/'),
-                        MainMenuButtons('Kesehatan', 'data-kesehatan', '/'),
+                        MainMenuButtons(
+                            'Kesehatan', 'data-kesehatan', '/kesehatan1'),
                         Container(
                           width: 70,
                         )

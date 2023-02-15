@@ -1,5 +1,6 @@
 import 'package:esantren_v1/Screens/Absensi1_PilihKelas.dart';
 import 'package:esantren_v1/Screens/Absensi2_Absensi.dart';
+import 'package:esantren_v1/Screens/Kesehatan1_ MainScreen.dart';
 import 'package:flutter/material.dart';
 import './Screens/HomePage.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/absensi': (context) => const Absensi1_PilihKelas(),
-        '/absensi2': (context) => Absensi2_Absensi()
+        '/absensi2': (context) => Absensi2_Absensi(),
+        '/kesehatan1': (context) => Kesehatan1_MainScreen()
       },
     );
   }

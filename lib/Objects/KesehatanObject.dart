@@ -8,6 +8,7 @@ class KesehatanObject {
   String tanggal;
   bool sudahAdaDetail;
   String? keluhan;
+  String? dirawatDi;
   String? keterangan;
   bool? sudahPeriksa;
   String? periksaDi;
@@ -20,6 +21,7 @@ class KesehatanObject {
       this.id, this.nama, this.imagePath, this.tanggal, this.sudahAdaDetail,
       {this.keluhan,
       this.keterangan,
+      this.dirawatDi,
       this.sudahPeriksa,
       this.periksaDi,
       this.suhuTubuh,

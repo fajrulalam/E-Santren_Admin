@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/KesehatanClass.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:esantren_v1/Bottomsheets/KesehatanDetail_BS.dart';
+
+import '../AlertDialogs/SudahSembuhDialog.dart';
 
 class Kesehatan1_MainScreen extends StatefulWidget {
   const Kesehatan1_MainScreen({Key? key}) : super(key: key);
@@ -19,16 +21,19 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
   final controller = TextEditingController();
 
   KesehatanClass kesehatanClass = new KesehatanClass();
-  late List<KesehatanObject> dataKesehatanSantri = kesehatanClass.getData();
+  late List<KesehatanObject> dataKesehatanSantriTanpaKeterangan;
+  late List<KesehatanObject> dataKesehatanSantriSudahAdaKeterangan;
+
   late int perluKeteranganItemCount =
-      kesehatanClass.getItemCount(dataKesehatanSantri, false);
+      kesehatanClass.getItemCount(dataKesehatanSantriTanpaKeterangan, false);
   late int lengkapKeternganItemCount =
-      kesehatanClass.getItemCount(dataKesehatanSantri, true);
+      kesehatanClass.getItemCount(dataKesehatanSantriTanpaKeterangan, true);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    filterSantriKeterangan();
   }
 
   @override
@@ -105,7 +110,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                     ],
                   ),
                   child: TextField(
-                    onChanged: searchSantri,
+                    onChanged: searchSantriTanpaKeterangan,
                     style: GoogleFonts.poppins(fontSize: 16),
                     controller: controller,
                     decoration: InputDecoration(
@@ -129,7 +134,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 8),
                     child: ListView.builder(
-                      itemCount: dataKesehatanSantri.length,
+                      itemCount: dataKesehatanSantriTanpaKeterangan.length,
                       physics: ClampingScrollPhysics(),
                       itemBuilder: (context, int index) {
                         return Container(
@@ -143,20 +148,25 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                 color: Colors.blueAccent.withOpacity(0.1)),
                             child: InkWell(
                               onTap: () {
-                                _showBottomSheet(
+                                kesehatanDetail_BS(
                                     context,
-                                    dataKesehatanSantri[index].nama,
-                                    dataKesehatanSantri[index].id);
+                                    dataKesehatanSantriTanpaKeterangan[index]
+                                        .nama,
+                                    dataKesehatanSantriTanpaKeterangan[index]
+                                        .id);
                               },
                               onLongPress: () {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
                                       return SudahSembuhDialog(
-                                          "", dataKesehatanSantri[index].nama);
+                                          "",
+                                          dataKesehatanSantriTanpaKeterangan[
+                                                  index]
+                                              .nama);
                                     }).then((value) {
                                   print(
-                                      '${dataKesehatanSantri[index].nama} $value');
+                                      '${dataKesehatanSantriTanpaKeterangan[index].nama} $value');
                                 });
                               },
                               child: Stack(
@@ -199,7 +209,8 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      dataKesehatanSantri[index].id,
+                                      dataKesehatanSantriTanpaKeterangan[index]
+                                          .id,
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 14, color: Colors.black54),
                                     ),
@@ -208,7 +219,8 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                   Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      dataKesehatanSantri[index].nama,
+                                      dataKesehatanSantriTanpaKeterangan[index]
+                                          .nama,
                                       maxLines: 2,
                                       style: GoogleFonts.raleway(
                                           fontSize: 16,
@@ -231,7 +243,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                   Container(
                                     alignment: Alignment.bottomLeft,
                                     child: Text(
-                                      'Sakit: ......',
+                                      'Keluhan      : ......',
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 16,
                                           color:
@@ -244,7 +256,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                   Container(
                                     alignment: Alignment.bottomLeft,
                                     child: Text(
-                                      'Dirawat di: ......',
+                                      'Dirawat di  : ......',
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 16,
                                           color:
@@ -266,299 +278,304 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
               ],
             ),
           ),
-          Center(
-            child: Text("It's rainy here"),
+          Padding(
+            padding: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 16, bottom: 1, left: 8, right: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    onChanged: searchSantriSudahAdaKeterangan,
+                    style: GoogleFonts.poppins(fontSize: 16),
+                    controller: controller,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Cari nama santri',
+                        focusColor: Colors.black,
+                        prefixIconColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide:
+                                BorderSide(width: 1.5, color: Colors.black87)),
+                        iconColor: Colors.black87),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    child: ListView.builder(
+                      itemCount: dataKesehatanSantriSudahAdaKeterangan.length,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(top: 6),
+                          child: Ink(
+                            height: 160,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.blueAccent, width: 2),
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.blueAccent.withOpacity(0.1)),
+                            child: InkWell(
+                              onTap: () {
+                                kesehatanDetail_BS(
+                                    context,
+                                    dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .nama,
+                                    dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .id,
+                                    keluhan:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .keluhan,
+                                    dirawatDi:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .dirawatDi,
+                                    keterangan:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .keterangan,
+                                    sudahPeriksa:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .sudahPeriksa,
+                                    periksaDi:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .periksaDi,
+                                    suhuTubuh:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .suhuTubuh,
+                                    tensi:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .tensi,
+                                    diagnosa:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .diagnosa,
+                                    preskripsi:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .preskripsi);
+                              },
+                              onLongPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return SudahSembuhDialog(
+                                          "",
+                                          dataKesehatanSantriSudahAdaKeterangan[
+                                                  index]
+                                              .nama);
+                                    }).then((value) {
+                                  print(
+                                      '${dataKesehatanSantriSudahAdaKeterangan[index].nama} $value');
+                                });
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    margin: EdgeInsets.only(left: 8),
+                                    child: ClipRRect(
+                                      child: Container(
+                                        height: 140.0,
+                                        width: 95.0,
+                                        child: Stack(children: [
+                                          Positioned.fill(
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        width: 1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0), //or 15.0
+                                                    color: Colors.grey,
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'images/foto_formal.jpg'),
+                                                        fit: BoxFit.fill))),
+                                          ),
+                                          Positioned.fill(
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              child: InkWell(
+                                                onTap: () {},
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      dataKesehatanSantriSudahAdaKeterangan[
+                                              index]
+                                          .id,
+                                      style: GoogleFonts.sourceSansPro(
+                                          fontSize: 14, color: Colors.black54),
+                                    ),
+                                    margin: EdgeInsets.only(left: 120, top: 17),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      dataKesehatanSantriSudahAdaKeterangan[
+                                              index]
+                                          .nama,
+                                      maxLines: 2,
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    margin: EdgeInsets.only(
+                                        left: 120, top: 0, bottom: 30),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topRight,
+                                    child: IconButton(
+                                      padding: EdgeInsets.all(0),
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      color: Colors.black87,
+                                      iconSize: 36,
+                                      onPressed: () {},
+                                    ),
+                                    margin: EdgeInsets.only(right: 0, top: 0),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.bottomLeft,
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: 'Keluhan      : ',
+                                          style: GoogleFonts.sourceSansPro(
+                                              fontSize: 16,
+                                              color: Colors.black38
+                                                  .withOpacity(0.5),
+                                              fontWeight: FontWeight.bold),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: dataKesehatanSantriSudahAdaKeterangan[
+                                                        index]
+                                                    .keluhan,
+                                                style:
+                                                    GoogleFonts.sourceSansPro(
+                                                        fontSize: 16,
+                                                        color: Colors.black38
+                                                            .withOpacity(0.5),
+                                                        fontWeight:
+                                                            FontWeight.normal))
+                                          ]),
+                                    ),
+                                    margin:
+                                        EdgeInsets.only(left: 120, bottom: 45),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.bottomLeft,
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: 'Dirawat di  : ',
+                                          style: GoogleFonts.sourceSansPro(
+                                              fontSize: 16,
+                                              color: Colors.black38
+                                                  .withOpacity(0.5),
+                                              fontWeight: FontWeight.bold),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: dataKesehatanSantriSudahAdaKeterangan[
+                                                        index]
+                                                    .dirawatDi,
+                                                style:
+                                                    GoogleFonts.sourceSansPro(
+                                                        fontSize: 16,
+                                                        color: Colors.black38
+                                                            .withOpacity(0.5),
+                                                        fontWeight:
+                                                            FontWeight.normal))
+                                          ]),
+                                    ),
+                                    margin:
+                                        EdgeInsets.only(left: 120, bottom: 20),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  void searchSantri(String query) {
+  void searchSantriTanpaKeterangan(String query) {
     final searchResult = KesehatanClass().getData().where((element) {
       final namaSantri = element.nama.toLowerCase();
       final input = query.toLowerCase();
 
-      return namaSantri.contains(input);
+      return namaSantri.contains(input) && element.sudahAdaDetail == false;
+      // return element.sudahAdaDetail == true;
     }).toList();
 
     setState(() {
-      dataKesehatanSantri = searchResult;
+      dataKesehatanSantriTanpaKeterangan = searchResult;
+    });
+  }
+
+  void searchSantriSudahAdaKeterangan(String query) {
+    final searchResult = KesehatanClass().getData().where((element) {
+      final namaSantri = element.nama.toLowerCase();
+      final input = query.toLowerCase();
+
+      return namaSantri.contains(input) && element.sudahAdaDetail == true;
+      // return element.sudahAdaDetail == true;
+    }).toList();
+
+    setState(() {
+      dataKesehatanSantriTanpaKeterangan = searchResult;
+    });
+  }
+
+  void filterSantriKeterangan() {
+    final searchResultSudahAdaKetrangan =
+        KesehatanClass().getData().where((element) {
+      return element.sudahAdaDetail == true;
+      // return element.sudahAdaDetail == true;
+    }).toList();
+
+    final searchResultTanpaKeterangan =
+        KesehatanClass().getData().where((element) {
+      return element.sudahAdaDetail == false;
+      // return element.sudahAdaDetail == true;
+    }).toList();
+
+    setState(() {
+      dataKesehatanSantriTanpaKeterangan = searchResultTanpaKeterangan;
+      dataKesehatanSantriSudahAdaKeterangan = searchResultSudahAdaKetrangan;
     });
   }
 }
-
-class SudahSembuhDialog extends StatelessWidget {
-  final title;
-  final nama;
-
-  SudahSembuhDialog(this.title, this.nama);
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      child: Stack(
-        alignment: Alignment.center,
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            color: Colors.orangeAccent.withOpacity(0.4),
-            height: 200,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(16, 40, 16, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    nama,
-                    style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    color: Colors.white30,
-                    margin: EdgeInsets.only(left: 8, top: 24, right: 8),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(4)),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pop(context, "Sembuh");
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(4, 12, 4, 12),
-                          child: Container(
-                            child: Center(
-                              child: Text(
-                                'Sudah Sembuh',
-                                style: GoogleFonts.raleway(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.white30,
-                    margin: EdgeInsets.only(left: 8, top: 8, right: 8),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(4)),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(4, 12, 4, 12),
-                          child: Container(
-                            child: Center(
-                              child: Text(
-                                'Masih sakit',
-                                style: GoogleFonts.raleway(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-void _showBottomSheet(BuildContext context, String nama, String id) {
-  bool isCheckboxChecked = false;
-  TextEditingController detail1Controller = TextEditingController();
-  TextEditingController detail2Controller = TextEditingController();
-  String selectedValue = "";
-
-  showModalBottomSheet(
-    isScrollControlled: true,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    context: context,
-    builder: (BuildContext context) {
-      return StatefulBuilder(builder: (context, setState) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: 16),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          id,
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14.0,
-                              color: Colors.black38),
-                        ),
-                        Text(
-                          nama,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Inti Keluhan',
-                          helperText: "mis: Demam, radang, diare",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10.0),
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "Dirawat di",
-                          helperText: "mis: Demam, radang, diare",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  initialValue: "",
-                  decoration: InputDecoration(
-                    labelText: "Keterangan tambahan",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Sudah periksa",
-                      style: GoogleFonts.poppins(fontSize: 14),
-                    ),
-                    Checkbox(
-                      value: isCheckboxChecked,
-                      onChanged: (isChecked) {
-                        setState(() {
-                          isCheckboxChecked = isChecked!;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                if (isCheckboxChecked)
-                  DottedBorder(
-                    color: Colors.grey,
-                    strokeWidth: 2,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: "Suhu tubuh (°C)",
-                                    suffixText: '°C',
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10.0),
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: "Tensi (mm/Hg)",
-                                    suffixText: 'mm/Hg',
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10.0),
-                          TextFormField(
-                            initialValue: "",
-                            decoration: InputDecoration(
-                              labelText: "Diagnosa",
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          TextFormField(
-                            maxLines: 1,
-                            initialValue: "",
-                            decoration: InputDecoration(
-                              labelText: "Preskripsi",
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                SizedBox(height: 20.0),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add logic to save data and dismiss bottom sheet
-                    Navigator.pop(context);
-                  },
-                  child: Text("Save"),
-                ),
-              ],
-            ),
-          ),
-        );
-      });
-    },
-  );
-}
-
-// List<DropdownMenuItem<String>> get dropdownItems {
-//   List<DropdownMenuItem<String>> menuItems = [
-//     DropdownMenuItem(child: Text("Asrama"), value: "USA"),
-//     DropdownMenuItem(child: Text("Rumah"), value: "Canada"),
-//     DropdownMenuItem(child: Text("RSUM"), value: "Brazil"),
-//     DropdownMenuItem(child: Text("RS lain"), value: "England"),
-//   ];
-//   return menuItems;
-// }

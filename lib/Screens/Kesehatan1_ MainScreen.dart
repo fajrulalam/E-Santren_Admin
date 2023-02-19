@@ -21,7 +21,8 @@ class Kesehatan1_MainScreen extends StatefulWidget {
 class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  final controller = TextEditingController();
+  final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
 
   KesehatanClass kesehatanClass = new KesehatanClass();
   late List<KesehatanObject> dataKesehatanSantriTanpaKeterangan;
@@ -41,7 +42,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
 
   @override
   Widget build(BuildContext context) {
-    _tabController = TabController(length: 2, vsync: this);
+    // _tabController = TabController(length: 2, vsync: this);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -115,7 +116,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                   child: TextField(
                     onChanged: searchSantriTanpaKeterangan,
                     style: GoogleFonts.poppins(fontSize: 16),
-                    controller: controller,
+                    controller: controller1,
                     decoration: InputDecoration(
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.search),
@@ -365,7 +366,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                   child: TextField(
                     onChanged: searchSantriSudahAdaKeterangan,
                     style: GoogleFonts.poppins(fontSize: 16),
-                    controller: controller,
+                    controller: controller2,
                     decoration: InputDecoration(
                         fillColor: Colors.white,
                         prefixIcon: Icon(Icons.search),
@@ -702,7 +703,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
     }).toList();
 
     setState(() {
-      dataKesehatanSantriTanpaKeterangan = searchResult;
+      dataKesehatanSantriSudahAdaKeterangan = searchResult;
     });
   }
 

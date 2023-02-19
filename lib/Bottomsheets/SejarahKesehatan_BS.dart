@@ -82,8 +82,54 @@ void sejarahKesehatan_BS(
                         // SizedBox(height: 70)
                       ],
                     ),
-                  )
-                // if (dataSejarahKesehatan.isNotEmpty)
+                  ),
+                if (dataSejarahKesehatan.isNotEmpty)
+                  Expanded(
+                      child: ListView.builder(
+                          itemCount: dataSejarahKesehatan.length,
+                          itemBuilder: (context, int index) {
+                            return ExpansionTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    dataSejarahKesehatan[index].keluhan!,
+                                    style: GoogleFonts.sourceSansPro(
+                                      fontSize: 16,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                          '${dataSejarahKesehatan[index].updateTimestamp}',
+                                          style: GoogleFonts.sourceSansPro(
+                                              color: Colors.black87
+                                                  .withOpacity(0.8),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500)),
+                                      if (dataSejarahKesehatan[index]
+                                              .sudahPeriksa ==
+                                          true)
+                                        Text('     Sudah Periksa',
+                                            style: GoogleFonts.sourceSansPro(
+                                                color: Colors.green,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold))
+                                      else
+                                        Text('     Belum Periksa',
+                                            style: GoogleFonts.sourceSansPro(
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              children: [],
+                            );
+                          }))
                 //   Ex
               ],
             ),

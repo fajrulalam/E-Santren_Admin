@@ -9,13 +9,14 @@ class SejarahKesehatan {
       case 'DU15230001':
         _sejarahKesehatan = <KesehatanObject>[
           KesehatanObject('DU15230001', 'Muhammad Fajrul Alam Ulin Nuha',
-              'images/foto_formal.jpg', '17-02-2023', false,
+              'images/foto_formal.jpg', '17-02-2023', true,
               keluhan: "Radang tenggorokan",
               dirawatDi: "RSUM",
               keterangan: "amandelnya bengkak",
-              sudahPeriksa: false),
+              sudahPeriksa: false,
+              updateTimestamp: '15-01-2023'),
           KesehatanObject('DU15230001', 'Muhammad Fajrul Alam Ulin Nuha',
-              'images/foto_formal.jpg', '17-02-2023', false,
+              'images/foto_formal.jpg', '17-02-2023', true,
               keluhan: "Sakit perut",
               dirawatDi: "Asrama",
               keterangan: "mules",

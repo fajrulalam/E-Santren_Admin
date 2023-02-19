@@ -144,7 +144,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                         return Container(
                           margin: EdgeInsets.only(top: 6),
                           child: Ink(
-                            height: 160,
+                            height: 140,
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: Colors.blueAccent, width: 2),
@@ -175,55 +175,55 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                               },
                               child: Stack(
                                 children: [
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    margin: EdgeInsets.only(left: 8),
-                                    child: ClipRRect(
-                                      child: Container(
-                                        height: 140.0,
-                                        width: 95.0,
-                                        child: Stack(children: [
-                                          Positioned.fill(
-                                            child: Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.black,
-                                                        width: 1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0), //or 15.0
-                                                    color: Colors.grey,
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'images/foto_formal.jpg'),
-                                                        fit: BoxFit.fill))),
-                                          ),
-                                          Positioned.fill(
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  sejarahKesehatan_BS(
-                                                      context,
-                                                      SejarahKesehatan().getData(
-                                                          dataKesehatanSantriTanpaKeterangan[
-                                                                  index]
-                                                              .id),
-                                                      nama:
-                                                          dataKesehatanSantriTanpaKeterangan[
-                                                                  index]
-                                                              .nama,
-                                                      id: dataKesehatanSantriTanpaKeterangan[
-                                                              index]
-                                                          .id);
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ]),
-                                      ),
-                                    ),
-                                  ),
+                                  // Container(
+                                  //   alignment: Alignment.centerLeft,
+                                  //   margin: EdgeInsets.only(left: 8),
+                                  //   child: ClipRRect(
+                                  //     child: Container(
+                                  //       height: 140.0,
+                                  //       width: 95.0,
+                                  //       child: Stack(children: [
+                                  //         Positioned.fill(
+                                  //           child: Container(
+                                  //               decoration: BoxDecoration(
+                                  //                   border: Border.all(
+                                  //                       color: Colors.black,
+                                  //                       width: 1),
+                                  //                   borderRadius:
+                                  //                       BorderRadius.circular(
+                                  //                           12.0), //or 15.0
+                                  //                   color: Colors.grey,
+                                  //                   image: DecorationImage(
+                                  //                       image: AssetImage(
+                                  //                           'images/foto_formal.jpg'),
+                                  //                       fit: BoxFit.fill))),
+                                  //         ),
+                                  //         Positioned.fill(
+                                  //           child: Material(
+                                  //             color: Colors.transparent,
+                                  //             child: InkWell(
+                                  //               onTap: () {
+                                  //                 sejarahKesehatan_BS(
+                                  //                     context,
+                                  //                     SejarahKesehatan().getData(
+                                  //                         dataKesehatanSantriTanpaKeterangan[
+                                  //                                 index]
+                                  //                             .id),
+                                  //                     nama:
+                                  //                         dataKesehatanSantriTanpaKeterangan[
+                                  //                                 index]
+                                  //                             .nama,
+                                  //                     id: dataKesehatanSantriTanpaKeterangan[
+                                  //                             index]
+                                  //                         .id);
+                                  //               },
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ]),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -232,7 +232,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 14, color: Colors.black54),
                                     ),
-                                    margin: EdgeInsets.only(left: 120, top: 17),
+                                    margin: EdgeInsets.only(left: 25, top: 17),
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
@@ -245,7 +245,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin: EdgeInsets.only(
-                                        left: 120, top: 0, bottom: 30),
+                                        left: 25, top: 0, bottom: 30),
                                   ),
                                   Container(
                                     alignment: Alignment.topRight,
@@ -313,7 +313,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 120, bottom: 45),
+                                        EdgeInsets.only(left: 25, bottom: 45),
                                   ),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -326,7 +326,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 120, bottom: 20),
+                                        EdgeInsets.only(left: 25, bottom: 20),
                                   ),
                                 ],
                               ),

@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/KesehatanClass.dart';
 import 'package:esantren_v1/Bottomsheets/KesehatanDetail_BS.dart';
 import 'package:esantren_v1/Bottomsheets/SejarahKesehatan_BS.dart';
+import 'package:esantren_v1/AlertDialogs/KesehatanOptionsDialog.dart';
 
 import '../AlertDialogs/SudahSembuhDialog.dart';
 
@@ -247,14 +248,58 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                   ),
                                   Container(
                                     alignment: Alignment.topRight,
+                                    margin: EdgeInsets.only(right: 0, top: 0),
                                     child: IconButton(
                                       padding: EdgeInsets.all(0),
                                       icon: Icon(Icons.arrow_drop_down),
                                       color: Colors.black87,
                                       iconSize: 36,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return KesehatanOptionsDialog(
+                                                  dataKesehatanSantriTanpaKeterangan[
+                                                          index]
+                                                      .nama,
+                                                  dataKesehatanSantriTanpaKeterangan[
+                                                          index]
+                                                      .sudahAdaDetail);
+                                            }).then((value) {
+                                          switch (value) {
+                                            case "Sembuh":
+                                              print(
+                                                  '${dataKesehatanSantriTanpaKeterangan[index].nama} $value');
+                                              break;
+                                            case "Lihat Sejarah Sakit":
+                                              sejarahKesehatan_BS(
+                                                  context,
+                                                  SejarahKesehatan().getData(
+                                                      dataKesehatanSantriTanpaKeterangan[
+                                                              index]
+                                                          .id),
+                                                  nama:
+                                                      dataKesehatanSantriTanpaKeterangan[
+                                                              index]
+                                                          .nama,
+                                                  id: dataKesehatanSantriTanpaKeterangan[
+                                                          index]
+                                                      .id);
+                                              break;
+                                            case "Tambahkan Detail":
+                                              kesehatanDetail_BS(
+                                                  context,
+                                                  dataKesehatanSantriTanpaKeterangan[
+                                                          index]
+                                                      .nama,
+                                                  dataKesehatanSantriTanpaKeterangan[
+                                                          index]
+                                                      .id);
+                                              break;
+                                          }
+                                        });
+                                      },
                                     ),
-                                    margin: EdgeInsets.only(right: 0, top: 0),
                                   ),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -486,7 +531,79 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                       icon: Icon(Icons.arrow_drop_down),
                                       color: Colors.black87,
                                       iconSize: 36,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return KesehatanOptionsDialog(
+                                                  dataKesehatanSantriSudahAdaKeterangan[
+                                                          index]
+                                                      .nama,
+                                                  dataKesehatanSantriSudahAdaKeterangan[
+                                                          index]
+                                                      .sudahAdaDetail);
+                                            }).then((value) {
+                                          switch (value) {
+                                            case "Sembuh":
+                                              print(
+                                                  '${dataKesehatanSantriSudahAdaKeterangan[index].nama} $value');
+                                              break;
+                                            case "Lihat Sejarah Sakit":
+                                              sejarahKesehatan_BS(
+                                                  context,
+                                                  SejarahKesehatan().getData(
+                                                      dataKesehatanSantriSudahAdaKeterangan[
+                                                              index]
+                                                          .id),
+                                                  nama:
+                                                      dataKesehatanSantriSudahAdaKeterangan[
+                                                              index]
+                                                          .nama,
+                                                  id: dataKesehatanSantriSudahAdaKeterangan[
+                                                          index]
+                                                      .id);
+                                              break;
+                                            case "Tambahkan Detail":
+                                              kesehatanDetail_BS(
+                                                  context,
+                                                  dataKesehatanSantriSudahAdaKeterangan[index]
+                                                      .nama,
+                                                  dataKesehatanSantriSudahAdaKeterangan[index]
+                                                      .id,
+                                                  keluhan:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .keluhan,
+                                                  dirawatDi:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .dirawatDi,
+                                                  keterangan:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .keterangan,
+                                                  sudahPeriksa:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .sudahPeriksa,
+                                                  periksaDi:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .periksaDi,
+                                                  suhuTubuh:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .suhuTubuh,
+                                                  tensi:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .tensi,
+                                                  diagnosa:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .diagnosa,
+                                                  preskripsi:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .preskripsi,
+                                                  updateTimestamp:
+                                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                                          .updateTimestamp);
+                                              break;
+                                          }
+                                        });
+                                      },
                                     ),
                                     margin: EdgeInsets.only(right: 0, top: 0),
                                   ),

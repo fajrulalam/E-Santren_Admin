@@ -1,10 +1,10 @@
 import 'package:esantren_v1/Objects/KesehatanObject.dart';
-import 'package:flutter/cupertino.dart';
 
 class KesehatanClass {
-  late List<KesehatanObject> dataAbsenSantri;
+  late List<KesehatanObject> _dataAbsenSantri;
+
   List<KesehatanObject> getData() {
-    dataAbsenSantri = <KesehatanObject>[
+    _dataAbsenSantri = <KesehatanObject>[
       KesehatanObject('DU15230001', 'Muhammad Fajrul Alam Ulin Nuha',
           'images/foto_formal.jpg', '17-02-2023', false),
       KesehatanObject('DU15230002', 'Naufal Sirullah Ahmad Sunandar',
@@ -19,15 +19,24 @@ class KesehatanClass {
           suhuTubuh: 38,
           tensi: "90/130",
           diagnosa: "tipes",
-          preskripsi: "obat (terlampir) dan banyak istirahat"),
+          preskripsi: "obat (terlampir) dan banyak istirahat",
+          updateTimestamp: "16-02-2023 17:34"),
       KesehatanObject('DU15230004', 'Abdul Sholeh', 'images/foto_formal.jpg',
           '17-02-2023', true,
           keluhan: "Pusing",
           dirawatDi: "Asrama",
-          keterangan: "pusing dan mual"),
+          keterangan: "pusing dan mual",
+          sudahPeriksa: false,
+          updateTimestamp: "17-02-2023 09:27"),
     ];
 
-    return dataAbsenSantri;
+    return _dataAbsenSantri;
+  }
+
+  List<KesehatanObject> get dataAbsenSantri => _dataAbsenSantri;
+
+  set dataAbsenSantri(List<KesehatanObject> value) {
+    _dataAbsenSantri = value;
   }
 
   int getItemCount(

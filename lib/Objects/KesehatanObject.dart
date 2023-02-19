@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 class KesehatanObject {
   String id;
   String nama;
@@ -16,6 +13,7 @@ class KesehatanObject {
   String? tensi;
   String? diagnosa;
   String? preskripsi;
+  String? updateTimestamp;
 
   KesehatanObject(
       this.id, this.nama, this.imagePath, this.tanggal, this.sudahAdaDetail,
@@ -27,5 +25,6 @@ class KesehatanObject {
       this.suhuTubuh,
       this.tensi,
       this.diagnosa,
-      this.preskripsi});
+      this.preskripsi,
+      this.updateTimestamp});
 }

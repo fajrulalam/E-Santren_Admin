@@ -12,7 +12,8 @@ void kesehatanDetail_BS(BuildContext context, String nama, String id,
     int? suhuTubuh,
     String? tensi,
     String? diagnosa,
-    String? preskripsi}) {
+    String? preskripsi,
+    String? updateTimestamp}) {
   bool isCheckboxChecked = false;
   if (sudahPeriksa != null) {
     isCheckboxChecked = sudahPeriksa;
@@ -100,8 +101,22 @@ void kesehatanDetail_BS(BuildContext context, String nama, String id,
                 ),
                 SizedBox(height: 10.0),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: updateTimestamp == null
+                      ? MainAxisAlignment.end
+                      : MainAxisAlignment.spaceBetween,
                   children: [
+                    if (updateTimestamp != null)
+                      Icon(
+                        Icons.access_time_outlined,
+                        size: 18,
+                      ),
+                    if (updateTimestamp != null)
+                      Expanded(
+                        child: Text(
+                          '  $updateTimestamp',
+                          style: GoogleFonts.poppins(fontSize: 14),
+                        ),
+                      ),
                     Text(
                       "Sudah periksa",
                       style: GoogleFonts.poppins(fontSize: 14),
@@ -116,6 +131,7 @@ void kesehatanDetail_BS(BuildContext context, String nama, String id,
                     ),
                   ],
                 ),
+                SizedBox(height: 10.0),
                 if (isCheckboxChecked)
                   DottedBorder(
                     color: Colors.grey,

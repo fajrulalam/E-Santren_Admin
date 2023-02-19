@@ -1,3 +1,4 @@
+import 'package:esantren_v1/Classes/SejarahKesehatanClass.dart';
 import 'package:esantren_v1/Objects/KesehatanObject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/KesehatanClass.dart';
 import 'package:esantren_v1/Bottomsheets/KesehatanDetail_BS.dart';
+import 'package:esantren_v1/Bottomsheets/SejarahKesehatan_BS.dart';
 
 import '../AlertDialogs/SudahSembuhDialog.dart';
 
@@ -198,7 +200,21 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                             child: Material(
                                               color: Colors.transparent,
                                               child: InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  sejarahKesehatan_BS(
+                                                      context,
+                                                      SejarahKesehatan().getData(
+                                                          dataKesehatanSantriTanpaKeterangan[
+                                                                  index]
+                                                              .id),
+                                                      nama:
+                                                          dataKesehatanSantriTanpaKeterangan[
+                                                                  index]
+                                                              .nama,
+                                                      id: dataKesehatanSantriTanpaKeterangan[
+                                                              index]
+                                                          .id);
+                                                },
                                               ),
                                             ),
                                           ),
@@ -346,12 +362,10 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                         .nama,
                                     dataKesehatanSantriSudahAdaKeterangan[index]
                                         .id,
-                                    keluhan:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .keluhan,
-                                    dirawatDi:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .dirawatDi,
+                                    keluhan: dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .keluhan,
+                                    dirawatDi: dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .dirawatDi,
                                     keterangan:
                                         dataKesehatanSantriSudahAdaKeterangan[index]
                                             .keterangan,
@@ -364,15 +378,16 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                     suhuTubuh:
                                         dataKesehatanSantriSudahAdaKeterangan[index]
                                             .suhuTubuh,
-                                    tensi:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .tensi,
-                                    diagnosa:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .diagnosa,
+                                    tensi: dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .tensi,
+                                    diagnosa: dataKesehatanSantriSudahAdaKeterangan[index]
+                                        .diagnosa,
                                     preskripsi:
                                         dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .preskripsi);
+                                            .preskripsi,
+                                    updateTimestamp:
+                                        dataKesehatanSantriSudahAdaKeterangan[index]
+                                            .updateTimestamp);
                               },
                               onLongPress: () {
                                 showDialog(
@@ -417,7 +432,21 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                             child: Material(
                                               color: Colors.transparent,
                                               child: InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  sejarahKesehatan_BS(
+                                                      context,
+                                                      SejarahKesehatan().getData(
+                                                          dataKesehatanSantriSudahAdaKeterangan[
+                                                                  index]
+                                                              .id),
+                                                      nama:
+                                                          dataKesehatanSantriSudahAdaKeterangan[
+                                                                  index]
+                                                              .nama,
+                                                      id: dataKesehatanSantriSudahAdaKeterangan[
+                                                              index]
+                                                          .id);
+                                                },
                                               ),
                                             ),
                                           ),

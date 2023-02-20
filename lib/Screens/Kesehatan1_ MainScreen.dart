@@ -1,8 +1,10 @@
+import 'package:esantren_v1/Bottomsheets/TambahSantriSakit_BS.dart';
 import 'package:esantren_v1/Classes/SejarahKesehatanClass.dart';
 import 'package:esantren_v1/Objects/KesehatanObject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/KesehatanClass.dart';
 import 'package:esantren_v1/Bottomsheets/KesehatanDetail_BS.dart';
@@ -113,25 +115,57 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                       ),
                     ],
                   ),
-                  child: TextField(
-                    onChanged: searchSantriTanpaKeterangan,
-                    style: GoogleFonts.poppins(fontSize: 16),
-                    controller: controller1,
-                    decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Cari nama santri',
-                        focusColor: Colors.black,
-                        prefixIconColor: Colors.grey,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide:
-                                BorderSide(width: 1, color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide:
-                                BorderSide(width: 1.5, color: Colors.black87)),
-                        iconColor: Colors.black87),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: TextField(
+                          onChanged: searchSantriTanpaKeterangan,
+                          style: GoogleFonts.poppins(fontSize: 16),
+                          controller: controller1,
+                          decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(Icons.search),
+                              hintText: 'Cari nama santri',
+                              focusColor: Colors.black,
+                              prefixIconColor: Colors.grey,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                      BorderSide(width: 1, color: Colors.grey)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide(
+                                      width: 1.5, color: Colors.black87)),
+                              iconColor: Colors.black87),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Material(
+                        elevation: 3,
+                        shadowColor: Colors.black87,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.black87.withOpacity(0.4)),
+                              borderRadius: BorderRadius.circular(16)),
+                          child: IconButton(
+                            splashRadius: 4,
+                            onPressed: () {
+                              tambahSantriSakit_BS(context);
+                            },
+                            icon: Icon(
+                              Icons.add,
+                              color: Colors.black87.withOpacity(0.4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -147,17 +181,35 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                             height: 140,
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.blueAccent, width: 2),
+                                    color: Colors.redAccent, width: 2),
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.blueAccent.withOpacity(0.1)),
+                                color: Colors.redAccent.withOpacity(0.1)),
                             child: InkWell(
+                              // onDoubleTap: () {
+                              //   sejarahKesehatan_BS(
+                              //       context,
+                              //       SejarahKesehatan().getData(
+                              //           dataKesehatanSantriTanpaKeterangan[
+                              //                   index]
+                              //               .id),
+                              //       nama: dataKesehatanSantriTanpaKeterangan[
+                              //               index]
+                              //           .nama,
+                              //       id: dataKesehatanSantriTanpaKeterangan[
+                              //               index]
+                              //           .id);
+                              // },
                               onTap: () {
-                                kesehatanDetail_BS(
-                                    context,
-                                    dataKesehatanSantriTanpaKeterangan[index]
-                                        .nama,
-                                    dataKesehatanSantriTanpaKeterangan[index]
-                                        .id);
+                                HapticFeedback.vibrate();
+
+                                Future.delayed(Duration(milliseconds: 50), () {
+                                  kesehatanDetail_BS(
+                                      context,
+                                      dataKesehatanSantriTanpaKeterangan[index]
+                                          .nama,
+                                      dataKesehatanSantriTanpaKeterangan[index]
+                                          .id);
+                                });
                               },
                               onLongPress: () {
                                 showDialog(
@@ -175,55 +227,61 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                               },
                               child: Stack(
                                 children: [
-                                  // Container(
-                                  //   alignment: Alignment.centerLeft,
-                                  //   margin: EdgeInsets.only(left: 8),
-                                  //   child: ClipRRect(
-                                  //     child: Container(
-                                  //       height: 140.0,
-                                  //       width: 95.0,
-                                  //       child: Stack(children: [
-                                  //         Positioned.fill(
-                                  //           child: Container(
-                                  //               decoration: BoxDecoration(
-                                  //                   border: Border.all(
-                                  //                       color: Colors.black,
-                                  //                       width: 1),
-                                  //                   borderRadius:
-                                  //                       BorderRadius.circular(
-                                  //                           12.0), //or 15.0
-                                  //                   color: Colors.grey,
-                                  //                   image: DecorationImage(
-                                  //                       image: AssetImage(
-                                  //                           'images/foto_formal.jpg'),
-                                  //                       fit: BoxFit.fill))),
-                                  //         ),
-                                  //         Positioned.fill(
-                                  //           child: Material(
-                                  //             color: Colors.transparent,
-                                  //             child: InkWell(
-                                  //               onTap: () {
-                                  //                 sejarahKesehatan_BS(
-                                  //                     context,
-                                  //                     SejarahKesehatan().getData(
-                                  //                         dataKesehatanSantriTanpaKeterangan[
-                                  //                                 index]
-                                  //                             .id),
-                                  //                     nama:
-                                  //                         dataKesehatanSantriTanpaKeterangan[
-                                  //                                 index]
-                                  //                             .nama,
-                                  //                     id: dataKesehatanSantriTanpaKeterangan[
-                                  //                             index]
-                                  //                         .id);
-                                  //               },
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       ]),
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    margin: EdgeInsets.only(left: 8),
+                                    child: ClipRRect(
+                                      child: Container(
+                                        height: 110.0,
+                                        width: 70.0,
+                                        child: Stack(children: [
+                                          Positioned.fill(
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black,
+                                                        width: 1),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0), //or 15.0
+                                                    color: Colors.grey,
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'images/foto_formal.jpg'),
+                                                        fit: BoxFit.fill))),
+                                          ),
+                                          Positioned.fill(
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  HapticFeedback.vibrate();
+                                                  Future.delayed(
+                                                      Duration(
+                                                          milliseconds: 50),
+                                                      () {
+                                                    sejarahKesehatan_BS(
+                                                        context,
+                                                        SejarahKesehatan().getData(
+                                                            dataKesehatanSantriTanpaKeterangan[
+                                                                    index]
+                                                                .id),
+                                                        nama:
+                                                            dataKesehatanSantriTanpaKeterangan[
+                                                                    index]
+                                                                .nama,
+                                                        id: dataKesehatanSantriTanpaKeterangan[
+                                                                index]
+                                                            .id);
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
@@ -232,7 +290,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 14, color: Colors.black54),
                                     ),
-                                    margin: EdgeInsets.only(left: 25, top: 17),
+                                    margin: EdgeInsets.only(left: 90, top: 17),
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
@@ -245,16 +303,16 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin: EdgeInsets.only(
-                                        left: 25, top: 0, bottom: 30),
+                                        left: 90, top: 0, bottom: 30),
                                   ),
                                   Container(
                                     alignment: Alignment.topRight,
-                                    margin: EdgeInsets.only(right: 0, top: 0),
+                                    margin: EdgeInsets.only(right: 8, top: 4),
                                     child: IconButton(
                                       padding: EdgeInsets.all(0),
-                                      icon: Icon(Icons.arrow_drop_down),
-                                      color: Colors.black87,
-                                      iconSize: 36,
+                                      icon: Icon(Icons.more_horiz),
+                                      color: Colors.black87.withOpacity(0.6),
+                                      iconSize: 28,
                                       onPressed: () {
                                         showDialog(
                                             context: context,
@@ -313,7 +371,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 25, bottom: 45),
+                                        EdgeInsets.only(left: 90, bottom: 45),
                                   ),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -326,7 +384,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 25, bottom: 20),
+                                        EdgeInsets.only(left: 90, bottom: 20),
                                   ),
                                 ],
                               ),
@@ -394,7 +452,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                         return Container(
                           margin: EdgeInsets.only(top: 6),
                           child: Ink(
-                            height: 160,
+                            height: 140,
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: Colors.blueAccent, width: 2),
@@ -402,38 +460,44 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                 color: Colors.blueAccent.withOpacity(0.1)),
                             child: InkWell(
                               onTap: () {
-                                kesehatanDetail_BS(
-                                    context,
-                                    dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .nama,
-                                    dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .id,
-                                    keluhan: dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .keluhan,
-                                    dirawatDi: dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .dirawatDi,
-                                    keterangan:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .keterangan,
-                                    sudahPeriksa:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .sudahPeriksa,
-                                    periksaDi:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .periksaDi,
-                                    suhuTubuh:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .suhuTubuh,
-                                    tensi: dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .tensi,
-                                    diagnosa: dataKesehatanSantriSudahAdaKeterangan[index]
-                                        .diagnosa,
-                                    preskripsi:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .preskripsi,
-                                    updateTimestamp:
-                                        dataKesehatanSantriSudahAdaKeterangan[index]
-                                            .updateTimestamp);
+                                HapticFeedback.vibrate();
+
+                                Future.delayed(Duration(milliseconds: 50), () {
+                                  kesehatanDetail_BS(
+                                      context,
+                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                          .nama,
+                                      dataKesehatanSantriSudahAdaKeterangan[index]
+                                          .id,
+                                      keluhan: dataKesehatanSantriSudahAdaKeterangan[index]
+                                          .keluhan,
+                                      dirawatDi:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .dirawatDi,
+                                      keterangan:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .keterangan,
+                                      sudahPeriksa:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .sudahPeriksa,
+                                      periksaDi:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .periksaDi,
+                                      suhuTubuh:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .suhuTubuh,
+                                      tensi: dataKesehatanSantriSudahAdaKeterangan[index]
+                                          .tensi,
+                                      diagnosa:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .diagnosa,
+                                      preskripsi:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .preskripsi,
+                                      updateTimestamp:
+                                          dataKesehatanSantriSudahAdaKeterangan[index]
+                                              .updateTimestamp);
+                                });
                               },
                               onLongPress: () {
                                 showDialog(
@@ -456,8 +520,8 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                     margin: EdgeInsets.only(left: 8),
                                     child: ClipRRect(
                                       child: Container(
-                                        height: 140.0,
-                                        width: 95.0,
+                                        height: 110.0,
+                                        width: 70.0,
                                         child: Stack(children: [
                                           Positioned.fill(
                                             child: Container(
@@ -509,7 +573,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                       style: GoogleFonts.sourceSansPro(
                                           fontSize: 14, color: Colors.black54),
                                     ),
-                                    margin: EdgeInsets.only(left: 120, top: 17),
+                                    margin: EdgeInsets.only(left: 90, top: 17),
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
@@ -523,15 +587,17 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           fontWeight: FontWeight.bold),
                                     ),
                                     margin: EdgeInsets.only(
-                                        left: 120, top: 0, bottom: 30),
+                                        left: 90, top: 0, bottom: 30),
                                   ),
                                   Container(
                                     alignment: Alignment.topRight,
+                                    margin:
+                                        EdgeInsets.only(right: 8, bottom: 4),
                                     child: IconButton(
                                       padding: EdgeInsets.all(0),
-                                      icon: Icon(Icons.arrow_drop_down),
-                                      color: Colors.black87,
-                                      iconSize: 36,
+                                      icon: Icon(Icons.more_horiz),
+                                      color: Colors.black87.withOpacity(0.6),
+                                      iconSize: 28,
                                       onPressed: () {
                                         showDialog(
                                             context: context,
@@ -606,7 +672,6 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                         });
                                       },
                                     ),
-                                    margin: EdgeInsets.only(right: 0, top: 0),
                                   ),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -633,7 +698,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           ]),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 120, bottom: 45),
+                                        EdgeInsets.only(left: 90, bottom: 45),
                                   ),
                                   Container(
                                     alignment: Alignment.bottomLeft,
@@ -660,7 +725,7 @@ class _Kesehatan1_MainScreenState extends State<Kesehatan1_MainScreen>
                                           ]),
                                     ),
                                     margin:
-                                        EdgeInsets.only(left: 120, bottom: 20),
+                                        EdgeInsets.only(left: 90, bottom: 20),
                                   ),
                                 ],
                               ),

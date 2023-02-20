@@ -47,14 +47,14 @@ void kesehatanDetail_BS(BuildContext context, String nama, String id,
                           id,
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              fontSize: 14.0,
+                              fontSize: 12.0,
                               color: Colors.black38),
                         ),
                         Text(
                           nama,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                            fontSize: 16.0,
                           ),
                         ),
                       ],

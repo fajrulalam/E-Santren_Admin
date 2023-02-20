@@ -22,7 +22,7 @@ class KesehatanOptionsDialog extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            color: Colors.orangeAccent.withOpacity(0.4),
+            color: Colors.blueGrey.withOpacity(0.4),
             height: 240,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 40, 16, 10),

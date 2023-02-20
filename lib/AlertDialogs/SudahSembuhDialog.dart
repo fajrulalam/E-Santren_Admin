@@ -17,7 +17,7 @@ class SudahSembuhDialog extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            color: Colors.orangeAccent.withOpacity(0.4),
+            color: Colors.grey.withOpacity(0.4),
             height: 200,
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 40, 16, 10),

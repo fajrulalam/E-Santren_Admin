@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         MainMenuButtons('Absensi', 'absensi', '/absensi'),
                         MainMenuButtons('Mengaji', 'ngaji', '/'),
-                        MainMenuButtons('Bayar SPP', 'bayar-spp', '/'),
+                        MainMenuButtons('Bayar SPP', 'bayar-spp', '/bayar-spp'),
                       ],
                     ),
                   ),

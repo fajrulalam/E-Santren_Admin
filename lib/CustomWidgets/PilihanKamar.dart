@@ -38,30 +38,55 @@ class CustomInkwell extends StatelessWidget {
   }
 }
 
-// return Container(
-//   margin: EdgeInsets.only(right: 6),
-//   width: 80,
-//   decoration: BoxDecoration(
-//     // gradient: RadialGradient(
-//     //   center: Alignment.center,
-//     //   radius: 0.95,
-//     //   colors: [Colors.white, Color(0xFFF61a6cf)],
-//     // ),
-//     border: Border.all(color: Colors.grey),
-//     color: Colors.white,
-//     borderRadius: BorderRadius.circular(10),
-//   ),
-//   child: InkWell(
-//     onTap: () {},
-//     splashColor: const Color(0x8034b0fc),
-//     child: Center(
-//       child: Text(
-//         kamar,
-//         style:
-//             GoogleFonts.raleway(fontWeight: FontWeight.bold, fontSize: 14),
-//       ),
-//     ),
-//   ),
-// );
-//   }
-// }
+class CustomButton extends StatefulWidget {
+  final String text;
+
+  const CustomButton({Key? key, required this.text}) : super(key: key);
+
+  @override
+  _CustomButtonState createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _isPressed = !_isPressed;
+        });
+      },
+      child: Ink(
+        decoration: BoxDecoration(
+          color: _isPressed ? Colors.blue : Colors.grey,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(
+            color: _isPressed ? Colors.blueAccent : Colors.grey.shade700,
+            width: 2.0,
+          ),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+            if (_isPressed)
+              Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

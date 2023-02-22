@@ -1,3 +1,5 @@
+import 'package:esantren_v1/Classes/AbsenClass.dart';
+import 'package:esantren_v1/Objects/AbsenObject.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +15,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
   int selectedButtonIndex = 0;
   final controller = TextEditingController();
 
+  List<AbsenObject> dataPembayaranSPP = AbsenClass().getData();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,183 +27,211 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(0),
           child: Container(
             child: Column(
               children: [
-                TextField(
-                  onChanged: (String query) {},
-                  style: GoogleFonts.poppins(fontSize: 16),
-                  controller: controller,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'Cari nama santri',
-                      focusColor: Colors.black,
-                      prefixIconColor: Colors.grey,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide(width: 1, color: Colors.grey)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                              BorderSide(width: 1.5, color: Colors.black87)),
-                      iconColor: Colors.black87),
+                Container(
+                  height: 16,
+                  color: Colors.white,
                 ),
-                SizedBox(
-                  height: 20,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  color: Colors.white,
+                  child: TextField(
+                    onChanged: (value) {
+                      searchSantri(value, selectedButtonIndex);
+                    },
+                    style: GoogleFonts.poppins(fontSize: 16),
+                    controller: controller,
+                    decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Cari nama santri',
+                        focusColor: Colors.black,
+                        prefixIconColor: Colors.grey,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide:
+                                BorderSide(width: 1.5, color: Colors.black87)),
+                        iconColor: Colors.black87),
+                  ),
                 ),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedButtonIndex = 0;
-                        });
-                      },
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: selectedButtonIndex == 0
-                              ? Colors.blue.withOpacity(0.5)
-                              : Colors.grey.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: selectedButtonIndex == 0
-                                ? Colors.blueAccent.withOpacity(0.75)
-                                : Colors.grey.shade700,
-                            width: 2.0,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Semua",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.0,
+                Container(color: Colors.white, height: 20),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedButtonIndex = 0;
+                              dataPembayaranSPP = AbsenClass().getData();
+                            });
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: selectedButtonIndex == 0
+                                  ? Colors.blue.withOpacity(0.8)
+                                  : Colors.grey.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: selectedButtonIndex == 0
+                                    ? Colors.blueAccent.withOpacity(0.75)
+                                    : Colors.grey.shade700,
+                                width: 2.0,
                               ),
                             ),
-                            if (selectedButtonIndex == 0) SizedBox(width: 5),
-                            if (selectedButtonIndex == 0)
-                              Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedButtonIndex = 1;
-                        });
-                      },
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: selectedButtonIndex == 1 ||
-                                  selectedButtonIndex == 0
-                              ? Colors.blue.withOpacity(0.5)
-                              : Colors.grey.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: selectedButtonIndex == 1 ||
-                                    selectedButtonIndex == 0
-                                ? Colors.blueAccent.withOpacity(0.75)
-                                : Colors.grey.shade700,
-                            width: 2.0,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Semua",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                                if (selectedButtonIndex == 0)
+                                  SizedBox(width: 5),
+                                if (selectedButtonIndex == 0)
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Belum Lunas",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.0,
+                      ),
+                      Container(width: 10, color: Colors.white),
+                      Material(
+                        // color: selectedButtonIndex == 0
+                        //     ? Colors.blue.withOpacity(0.5)
+                        //     : Colors.grey.withOpacity(0.3),
+                        // borderRadius: BorderRadius.circular(12.0),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedButtonIndex = 1;
+                              filterSantriKeterangan(false);
+                            });
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: selectedButtonIndex == 1 ||
+                                      selectedButtonIndex == 0
+                                  ? Colors.blue.withOpacity(0.8)
+                                  : Colors.grey.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: selectedButtonIndex == 1 ||
+                                        selectedButtonIndex == 0
+                                    ? Colors.blueAccent.withOpacity(0.75)
+                                    : Colors.grey.shade700,
+                                width: 2.0,
                               ),
                             ),
-                            if (selectedButtonIndex == 1 ||
-                                selectedButtonIndex == 0)
-                              SizedBox(width: 5),
-                            if (selectedButtonIndex == 1 ||
-                                selectedButtonIndex == 0)
-                              Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedButtonIndex = 2;
-                        });
-                      },
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: selectedButtonIndex == 2 ||
-                                  selectedButtonIndex == 0
-                              ? Colors.blue.withOpacity(0.5)
-                              : Colors.grey.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: selectedButtonIndex == 2 ||
-                                    selectedButtonIndex == 0
-                                ? Colors.blueAccent.withOpacity(0.75)
-                                : Colors.grey.shade700,
-                            width: 2.0,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Belum Lunas",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                                if (selectedButtonIndex == 1 ||
+                                    selectedButtonIndex == 0)
+                                  SizedBox(width: 5),
+                                if (selectedButtonIndex == 1 ||
+                                    selectedButtonIndex == 0)
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Lunas",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.0,
+                      ),
+                      Container(width: 10, color: Colors.white),
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedButtonIndex = 2;
+                              filterSantriKeterangan(true);
+                            });
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              color: selectedButtonIndex == 2 ||
+                                      selectedButtonIndex == 0
+                                  ? Colors.blue.withOpacity(0.8)
+                                  : Colors.grey.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: selectedButtonIndex == 2 ||
+                                        selectedButtonIndex == 0
+                                    ? Colors.blueAccent.withOpacity(0.75)
+                                    : Colors.grey.shade700,
+                                width: 2.0,
                               ),
                             ),
-                            if (selectedButtonIndex == 2 ||
-                                selectedButtonIndex == 0)
-                              SizedBox(width: 10),
-                            if (selectedButtonIndex == 2 ||
-                                selectedButtonIndex == 0)
-                              Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                          ],
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Lunas",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                                if (selectedButtonIndex == 2 ||
+                                    selectedButtonIndex == 0)
+                                  SizedBox(width: 10),
+                                if (selectedButtonIndex == 2 ||
+                                    selectedButtonIndex == 0)
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                SizedBox(height: 8),
+                Container(height: 10, color: Colors.white),
                 Divider(color: Colors.grey, height: 1),
                 Expanded(
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: ListView.builder(
-                      itemCount: 2,
+                      itemCount: dataPembayaranSPP.length,
                       physics: ClampingScrollPhysics(),
                       itemBuilder: (context, int index) {
                         return Container(
@@ -208,9 +240,14 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                             height: 120,
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.redAccent, width: 2),
+                                    color: dataPembayaranSPP[index].lunasSPP
+                                        ? Colors.green
+                                        : Colors.red.withOpacity(0.8),
+                                    width: 2),
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.redAccent.withOpacity(0.1)),
+                                color: dataPembayaranSPP[index].lunasSPP
+                                    ? Colors.green.withOpacity(0.1)
+                                    : Colors.red.withOpacity(0.1)),
                             child: InkWell(
                               onTap: () {},
                               onLongPress: () {},
@@ -226,29 +263,43 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                       children: [
                                         Container(
                                           child: Text(
-                                            'ID',
+                                            dataPembayaranSPP[index].id,
                                             style: GoogleFonts.sourceSansPro(
                                                 fontSize: 14,
                                                 color: Colors.black54),
                                           ),
                                         ),
-                                        Container(
-                                          alignment: Alignment.topRight,
-                                          child: Text(
-                                            "LUNAS",
-                                            maxLines: 2,
-                                            style: GoogleFonts.raleway(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
+                                        if (dataPembayaranSPP[index].lunasSPP ==
+                                            true)
+                                          Container(
+                                            alignment: Alignment.topRight,
+                                            child: Text(
+                                              "LUNAS",
+                                              maxLines: 2,
+                                              style: GoogleFonts.raleway(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
+                                        if (dataPembayaranSPP[index].lunasSPP ==
+                                            false)
+                                          Container(
+                                            alignment: Alignment.topRight,
+                                            child: Text(
+                                              "BAYAR",
+                                              maxLines: 2,
+                                              style: GoogleFonts.raleway(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       margin: EdgeInsets.only(top: 12),
                                       child: Text(
-                                        "Muhammad Fajrul Alam Ulin Nuha",
+                                        dataPembayaranSPP[index].nama,
                                         maxLines: 2,
                                         style: GoogleFonts.raleway(
                                             fontSize: 16,
@@ -280,5 +331,40 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
             ),
           ),
         ));
+  }
+
+  void filterSantriKeterangan(bool lunas) {
+    final filterResult = AbsenClass().getData().where((element) {
+      return element.lunasSPP == lunas;
+      // return element.sudahAdaDetail == true;
+    }).toList();
+
+    setState(() {
+      dataPembayaranSPP = filterResult;
+      // dataKesehatanSantriSudahAdaKeterangan = searchResultSudahAdaKetrangan;
+    });
+  }
+
+  void searchSantri(String query, int selectedButtonIndex) {
+    final searchResult = AbsenClass().getData().where((element) {
+      final namaSantri = element.nama.toLowerCase();
+      final input = query.toLowerCase();
+      switch (selectedButtonIndex) {
+        case 0:
+          return namaSantri.contains(input);
+        case 1:
+          return namaSantri.contains(input) && element.lunasSPP == false;
+        case 2:
+          return namaSantri.contains(input) && element.lunasSPP == true;
+        default:
+          return namaSantri.contains(input);
+      }
+      // return namaSantri.contains(input) && element.lunasSPP == true;
+      // return element.sudahAdaDetail == true;
+    }).toList();
+
+    setState(() {
+      dataPembayaranSPP = searchResult;
+    });
   }
 }

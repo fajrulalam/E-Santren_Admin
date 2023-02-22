@@ -30,8 +30,6 @@ class SejarahKesehatan {
               updateTimestamp: "16-02-2023 17:34"),
         ];
         break;
-      case 'DU15230002':
-        break;
       case 'DU15230003':
         _sejarahKesehatan = <KesehatanObject>[
           KesehatanObject('DU15230003', 'Muhammad Rekyan',
@@ -58,6 +56,9 @@ class SejarahKesehatan {
               sudahPeriksa: false,
               updateTimestamp: "17-02-2023 09:27")
         ];
+        break;
+      default:
+        break;
     }
 
     return _sejarahKesehatan;

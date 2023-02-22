@@ -16,7 +16,7 @@ class AbsenClass {
           'Hadir', false),
       AbsenObject('DU15230008', 'Dwiki Cahyo', 'Kamar 3', 'Alfa', true),
       AbsenObject('DU15230009', 'Ahmad Giffar', 'Kamar 6', 'Sakit', false),
-      AbsenObject('DU15230009', 'Tio Arya', 'Kamar 6', 'Hadir', true),
+      AbsenObject('DU15230010', 'Tio Arya', 'Kamar 6', 'Hadir', true),
     ];
 
     return dataAbsenSantri;

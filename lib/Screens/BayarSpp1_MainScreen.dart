@@ -2,6 +2,8 @@ import 'package:esantren_v1/Classes/AbsenClass.dart';
 import 'package:esantren_v1/Objects/AbsenObject.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:esantren_v1/Classes/SejarahPembayaranClass.dart';
+import 'package:esantren_v1/Bottomsheets/sejarahPembayaran_BS.dart';
 
 class BayarSpp1_MainScreen extends StatefulWidget {
   const BayarSpp1_MainScreen({Key? key}) : super(key: key);
@@ -72,7 +74,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                           onTap: () {
                             setState(() {
                               selectedButtonIndex = 0;
-                              dataPembayaranSPP = AbsenClass().getData();
+                              searchSantri(
+                                  controller.text, selectedButtonIndex);
                             });
                           },
                           child: Ink(
@@ -124,7 +127,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                           onTap: () {
                             setState(() {
                               selectedButtonIndex = 1;
-                              filterSantriKeterangan(false);
+                              searchSantri(
+                                  controller.text, selectedButtonIndex);
                             });
                           },
                           child: Ink(
@@ -176,7 +180,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                           onTap: () {
                             setState(() {
                               selectedButtonIndex = 2;
-                              filterSantriKeterangan(true);
+                              searchSantri(
+                                  controller.text, selectedButtonIndex);
                             });
                           },
                           child: Ink(
@@ -249,7 +254,16 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     ? Colors.green.withOpacity(0.1)
                                     : Colors.red.withOpacity(0.1)),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                print(dataPembayaranSPP[index].id);
+                                sejarahPembayaran_BS(
+                                    context,
+                                    SejarahPembayaranClass(
+                                            dataPembayaranSPP[index].id)
+                                        .getSejarahPembayaranInvoice(),
+                                    nama: dataPembayaranSPP[index].nama,
+                                    id: dataPembayaranSPP[index].id);
+                              },
                               onLongPress: () {},
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
@@ -331,18 +345,6 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
             ),
           ),
         ));
-  }
-
-  void filterSantriKeterangan(bool lunas) {
-    final filterResult = AbsenClass().getData().where((element) {
-      return element.lunasSPP == lunas;
-      // return element.sudahAdaDetail == true;
-    }).toList();
-
-    setState(() {
-      dataPembayaranSPP = filterResult;
-      // dataKesehatanSantriSudahAdaKeterangan = searchResultSudahAdaKetrangan;
-    });
   }
 
   void searchSantri(String query, int selectedButtonIndex) {

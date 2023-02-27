@@ -28,7 +28,7 @@ void sejarahPembayaran_BS(BuildContext context,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sejarah Sakit",
+                          "Sejarah Pembayaran SPP",
                           style: GoogleFonts.poppins(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
@@ -99,104 +99,105 @@ void sejarahPembayaran_BS(BuildContext context,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: 10),
-                              Text(
-                                dataSejarahPembayaranSPP[index].pembayaranBulan,
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: 20,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
+                              // Text(
+                              //   dataSejarahPembayaranSPP[index].pembayaranBulan,
+                              //   style: GoogleFonts.sourceSansPro(
+                              //     fontSize: 20,
+                              //     color: Colors.black87,
+                              //     fontWeight: FontWeight.w600,
+                              //   ),
+                              // ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                      '${dataSejarahPembayaranSPP[index].tanggalPembayaran}',
-                                      style: GoogleFonts.sourceSansPro(
-                                          color:
-                                              Colors.black87.withOpacity(0.8),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500)),
+                                    dataSejarahPembayaranSPP[index]
+                                        .pembayaranBulan,
+                                    style: GoogleFonts.sourceSansPro(
+                                      fontSize: 20,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   if (dataSejarahPembayaranSPP[index].lunas ==
                                       true)
-                                    Text('     Lunas',
+                                    Text('Lunas',
                                         style: GoogleFonts.sourceSansPro(
                                             color: Colors.green,
-                                            fontSize: 16,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold))
                                   else
-                                    Text('     Belum Lunas',
-                                        style: GoogleFonts.sourceSansPro(
-                                            color: Colors.grey,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        minimumSize: Size.zero, // Set this
+                                        padding: EdgeInsets.zero,
+                                      ),
+                                      onPressed: () {},
+                                      child: Text('Bayar',
+                                          style: GoogleFonts.sourceSansPro(
+                                              color: Colors.red,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
                                 ],
                               ),
                             ],
                           ),
                           children: [
-                            if (dataSejarahPembayaranSPP[index].lunas == true)
-                              Container(
-                                margin: EdgeInsets.only(
-                                    right: 20, left: 20, top: 4, bottom: 8),
-                                child: DottedBorder(
-                                  padding: EdgeInsets.all(8),
-                                  strokeWidth: 1,
-                                  color: Colors.black.withOpacity(0.2),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 10),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: TextFormField(
-                                                initialValue:
-                                                    dataSejarahPembayaranSPP[
-                                                            index]
-                                                        .diterimaOleh,
-                                                readOnly: true,
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 5,
-                                                          horizontal: 10),
-                                                  labelText: 'Diterima oleh',
-                                                  border: OutlineInputBorder(),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 4),
-                                          ],
+                            Container(
+                              margin: EdgeInsets.only(
+                                  right: 20, left: 20, top: 4, bottom: 8),
+                              child: DottedBorder(
+                                padding: EdgeInsets.all(8),
+                                strokeWidth: 1,
+                                color: Colors.black.withOpacity(0.2),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 4),
+                                    Text(
+                                        'Tanggal Pembayaran : ${dataSejarahPembayaranSPP[index].tanggalPembayaran}',
+                                        style: GoogleFonts.poppins()),
+                                    SizedBox(height: 20),
+                                    Container(
+                                      child: TextFormField(
+                                        initialValue:
+                                            dataSejarahPembayaranSPP[index]
+                                                .diterimaOleh,
+                                        readOnly: true,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          labelText: 'Diterima oleh',
+                                          border: OutlineInputBorder(),
                                         ),
-                                        SizedBox(height: 10),
-                                        Row(
-                                          children: [
-                                            SizedBox(height: 10),
-                                            TextFormField(
-                                              initialValue:
-                                                  dataSejarahPembayaranSPP[
-                                                          index]
-                                                      .keterangan,
-                                              readOnly: true,
-                                              minLines: 1,
-                                              maxLines: 3,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 10),
-                                                labelText: 'Preskripsi',
-                                                border: OutlineInputBorder(),
-                                              ),
-                                            ),
-                                            SizedBox(height: 10),
-                                          ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 10),
+                                    if (dataSejarahPembayaranSPP[index]
+                                            .keterangan !=
+                                        null)
+                                      Container(
+                                        child: TextFormField(
+                                          initialValue:
+                                              dataSejarahPembayaranSPP[index]
+                                                  .keterangan,
+                                          readOnly: true,
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 5,
+                                                    horizontal: 10),
+                                            labelText: 'Keterangan',
+                                            border: OutlineInputBorder(),
+                                          ),
                                         ),
-                                      ]),
+                                      ),
+                                  ],
                                 ),
-                              )
+                              ),
+                            )
                           ],
                         );
                       },

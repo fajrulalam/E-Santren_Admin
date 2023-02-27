@@ -3,10 +3,8 @@ import 'package:flutter/cupertino.dart';
 
 class SejarahPembayaranClass {
   late List<SejarahPembayaranObject> _dataPembayaranSantri = [];
-  List<String> sejarahPembayaranList = [];
 
   late List<InvoiceObject> dataInvoice = [];
-  List<String> invoiceList = [];
 
   late List<SejarahPembayaranInvoiceObject> dataSejarahPembayaranInvoice = [];
 
@@ -22,12 +20,6 @@ class SejarahPembayaranClass {
     _dataPembayaranSantri.clear();
     switch (id) {
       case 'DU15230001':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -44,17 +36,12 @@ class SejarahPembayaranClass {
               keterangan: "sekalian bayar untuk bulan depan"),
           SejarahPembayaranObject(
               pembayaranBulan: 'Februari 2023',
-              tanggalPembayaran: '25-12-2023',
+              tanggalPembayaran: '25-02-2023',
               diterimaOleh: "Mundzir",
               keterangan: "sudah lunas sejak bulan lalu")
         ];
         break;
       case 'DU15230002':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -71,12 +58,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230003':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -97,12 +78,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230004':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -123,12 +98,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230005':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -151,12 +120,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230006':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Februari 2023"
-        ];
-
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -173,12 +136,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230007':
-        sejarahPembayaranList = [
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
-
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'Desember 2022',
@@ -195,12 +152,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230008':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023",
-          "Februari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -223,12 +174,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230009':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Februari 2023"
-        ];
-
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -245,11 +190,6 @@ class SejarahPembayaranClass {
         ];
         break;
       case 'DU15230010':
-        sejarahPembayaranList = [
-          'November 2022',
-          "Desember 2022",
-          "Januari 2023"
-        ];
         _dataPembayaranSantri = <SejarahPembayaranObject>[
           SejarahPembayaranObject(
               pembayaranBulan: 'November 2022',
@@ -274,18 +214,11 @@ class SejarahPembayaranClass {
     //Function ini nanti menerima TglMasukSantri sebagai parameter.
     //Parameter tersebut akan digunakan untuk memilih tagihan mana saja yang relevan untuk ditampilkan
 
-    invoiceList = [
-      'November 2022',
-      'Desember 2022',
-      'Januari 2023',
-      'Februari 2023'
-    ];
-
     dataInvoice = <InvoiceObject>[
-      InvoiceObject('November 2022', '01-11-2022'),
-      InvoiceObject('Desember 2022', '01-12-2022'),
-      InvoiceObject('Januari 2023', '01-01-2023'),
       InvoiceObject('Februari 2023', '01-02-2023'),
+      InvoiceObject('Januari 2023', '01-01-2023'),
+      InvoiceObject('Desember 2022', '01-12-2022'),
+      InvoiceObject('November 2022', '01-11-2022'),
     ];
 
     return dataInvoice;
@@ -313,6 +246,17 @@ class SejarahPembayaranClass {
             bulanInvoice.pembayaranBulan, "Belum dibayar", "", false));
         return;
       }
+
+      if (_dataPembayaranSantri[index].keterangan != null) {
+        dataSejarahPembayaranInvoice.add(SejarahPembayaranInvoiceObject(
+            _dataPembayaranSantri[index].pembayaranBulan!,
+            _dataPembayaranSantri[index].tanggalPembayaran!,
+            _dataPembayaranSantri[index].diterimaOleh!,
+            keterangan: _dataPembayaranSantri[index].keterangan!,
+            true));
+        return;
+      }
+
       dataSejarahPembayaranInvoice.add(SejarahPembayaranInvoiceObject(
           _dataPembayaranSantri[index].pembayaranBulan!,
           _dataPembayaranSantri[index].tanggalPembayaran!,

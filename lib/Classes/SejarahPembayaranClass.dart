@@ -13,6 +13,7 @@ class SejarahPembayaranClass {
   } //ini nanti yang dikirim ke ListView
 
   String id;
+  int jumlahTagihan = 0;
 
   SejarahPembayaranClass(this.id);
 
@@ -43,18 +44,18 @@ class SejarahPembayaranClass {
         break;
       case 'DU15230002':
         _dataPembayaranSantri = <SejarahPembayaranObject>[
-          SejarahPembayaranObject(
-              pembayaranBulan: 'November 2022',
-              tanggalPembayaran: '12-11-2022',
-              diterimaOleh: "Udin"),
-          SejarahPembayaranObject(
-              pembayaranBulan: 'Desember 2022',
-              tanggalPembayaran: '05-12-2022',
-              diterimaOleh: "Mundzir"),
-          SejarahPembayaranObject(
-              pembayaranBulan: 'Januari 2023',
-              tanggalPembayaran: '15-01-2023',
-              diterimaOleh: "Mumtaz"),
+          // SejarahPembayaranObject(
+          //     pembayaranBulan: 'November 2022',
+          //     tanggalPembayaran: '12-11-2022',
+          //     diterimaOleh: "Udin"),
+          // SejarahPembayaranObject(
+          //     pembayaranBulan: 'Desember 2022',
+          //     tanggalPembayaran: '05-12-2022',
+          //     diterimaOleh: "Mundzir"),
+          // SejarahPembayaranObject(
+          //     pembayaranBulan: 'Januari 2023',
+          //     tanggalPembayaran: '15-01-2023',
+          //     diterimaOleh: "Mumtaz"),
         ];
         break;
       case 'DU15230003':
@@ -215,10 +216,10 @@ class SejarahPembayaranClass {
     //Parameter tersebut akan digunakan untuk memilih tagihan mana saja yang relevan untuk ditampilkan
 
     dataInvoice = <InvoiceObject>[
-      InvoiceObject('Februari 2023', '01-02-2023'),
-      InvoiceObject('Januari 2023', '01-01-2023'),
-      InvoiceObject('Desember 2022', '01-12-2022'),
-      InvoiceObject('November 2022', '01-11-2022'),
+      InvoiceObject('Februari 2023', '01-02-2023', 250000),
+      InvoiceObject('Januari 2023', '01-01-2023', 250000),
+      InvoiceObject('Desember 2022', '01-12-2022', 250000),
+      InvoiceObject('November 2022', '01-11-2022', 250000),
     ];
 
     return dataInvoice;
@@ -239,11 +240,19 @@ class SejarahPembayaranClass {
       index = _dataPembayaranSantri.indexWhere(
           (element) => element.pembayaranBulan == bulanInvoice.pembayaranBulan);
 
-      print('${bulanInvoice.pembayaranBulan} ${_dataPembayaranSantri[0]}');
+      try {
+        print('${bulanInvoice.pembayaranBulan} ${_dataPembayaranSantri[0]}');
+      } catch (e) {
+        print(e);
+      }
 
       if (index == -1) {
         dataSejarahPembayaranInvoice.add(SejarahPembayaranInvoiceObject(
-            bulanInvoice.pembayaranBulan, "Belum dibayar", "", false));
+            bulanInvoice.pembayaranBulan,
+            "Belum dibayar",
+            "",
+            bulanInvoice.nominal,
+            false));
         return;
       }
 
@@ -253,6 +262,7 @@ class SejarahPembayaranClass {
             _dataPembayaranSantri[index].tanggalPembayaran!,
             _dataPembayaranSantri[index].diterimaOleh!,
             keterangan: _dataPembayaranSantri[index].keterangan!,
+            bulanInvoice.nominal,
             true));
         return;
       }
@@ -261,9 +271,22 @@ class SejarahPembayaranClass {
           _dataPembayaranSantri[index].pembayaranBulan!,
           _dataPembayaranSantri[index].tanggalPembayaran!,
           _dataPembayaranSantri[index].diterimaOleh!,
+          bulanInvoice.nominal,
           true));
     });
 
     return dataSejarahPembayaranInvoice;
+  }
+
+  int getJumlahTagihan(
+      List<SejarahPembayaranInvoiceObject> hitungJumlahTagihan) {
+    int jumlahTagihan = 0;
+    hitungJumlahTagihan.forEach((element) {
+      if (element.lunas == false) {
+        jumlahTagihan++;
+      }
+    });
+
+    return jumlahTagihan;
   }
 }

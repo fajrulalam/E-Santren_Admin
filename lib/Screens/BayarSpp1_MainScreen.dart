@@ -3,7 +3,9 @@ import 'package:esantren_v1/Objects/AbsenObject.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/SejarahPembayaranClass.dart';
-import 'package:esantren_v1/Bottomsheets/sejarahPembayaran_BS.dart';
+import 'package:esantren_v1/Bottomsheets/PembayaranSejarah_BS.dart';
+
+import '../Bottomsheets/PembayaranTambahPembayaran_BS.dart';
 
 class BayarSpp1_MainScreen extends StatefulWidget {
   const BayarSpp1_MainScreen({Key? key}) : super(key: key);
@@ -264,7 +266,15 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     nama: dataPembayaranSPP[index].nama,
                                     id: dataPembayaranSPP[index].id);
                               },
-                              onLongPress: () {},
+                              onLongPress: () {
+                                tambahPembayaran_BS(
+                                    context,
+                                    dataPembayaranSPP[index].nama,
+                                    dataPembayaranSPP[index].id,
+                                    SejarahPembayaranClass(
+                                            dataPembayaranSPP[index].id)
+                                        .getSejarahPembayaranInvoice());
+                              },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),

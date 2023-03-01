@@ -1,4 +1,4 @@
-import 'package:esantren_v1/Bottomsheets/TambahSantriSakit_BS.dart';
+import 'package:esantren_v1/Bottomsheets/KesehatanTambahSantriSakit_BS.dart';
 import 'package:esantren_v1/Classes/SejarahKesehatanClass.dart';
 import 'package:esantren_v1/Objects/KesehatanObject.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/KesehatanClass.dart';
 import 'package:esantren_v1/Bottomsheets/KesehatanDetail_BS.dart';
-import 'package:esantren_v1/Bottomsheets/SejarahKesehatan_BS.dart';
+import 'package:esantren_v1/Bottomsheets/KesehatanSejarah_BS.dart';
 import 'package:esantren_v1/AlertDialogs/KesehatanOptionsDialog.dart';
 
 import '../AlertDialogs/SudahSembuhDialog.dart';

@@ -20,8 +20,10 @@ class SejarahPembayaranObject {
 class InvoiceObject {
   String pembayaranBulan;
   String tanggalPembuatanInvoice;
+  int nominal;
 
-  InvoiceObject(this.pembayaranBulan, this.tanggalPembuatanInvoice);
+  InvoiceObject(
+      this.pembayaranBulan, this.tanggalPembuatanInvoice, this.nominal);
 }
 
 //Ini adalah class yang didapatkan setelah memproses invoice2 yang relevan
@@ -32,12 +34,13 @@ class SejarahPembayaranInvoiceObject {
   String pembayaranBulan;
   String tanggalPembayaran;
   String diterimaOleh;
+  int nominal;
   bool lunas;
   String? id;
   String? nama;
   String? keterangan;
 
   SejarahPembayaranInvoiceObject(this.pembayaranBulan, this.tanggalPembayaran,
-      this.diterimaOleh, this.lunas,
+      this.diterimaOleh, this.nominal, this.lunas,
       {this.id, this.nama, this.keterangan});
 }

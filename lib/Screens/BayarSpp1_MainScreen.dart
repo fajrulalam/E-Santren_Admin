@@ -267,13 +267,29 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     id: dataPembayaranSPP[index].id);
                               },
                               onLongPress: () {
-                                tambahPembayaran_BS(
-                                    context,
-                                    dataPembayaranSPP[index].nama,
-                                    dataPembayaranSPP[index].id,
-                                    SejarahPembayaranClass(
-                                            dataPembayaranSPP[index].id)
-                                        .getSejarahPembayaranInvoice());
+                                showModalBottomSheet(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    isScrollControlled: true,
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return TambahanPembayaranBS(
+                                          nama: dataPembayaranSPP[index].nama,
+                                          id: dataPembayaranSPP[index].id,
+                                          dataSejarahPembayaran:
+                                              SejarahPembayaranClass(
+                                                      dataPembayaranSPP[index]
+                                                          .id)
+                                                  .getSejarahPembayaranInvoice());
+                                    });
+                                // tambahPembayaran_BS(
+                                //     context,
+                                //     dataPembayaranSPP[index].nama,
+                                //     dataPembayaranSPP[index].id,
+                                //     SejarahPembayaranClass(
+                                //             dataPembayaranSPP[index].id)
+                                //         .getSejarahPembayaranInvoice());
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(

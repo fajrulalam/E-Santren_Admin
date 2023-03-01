@@ -22,10 +22,13 @@ class TambahanPembayaranBS extends StatelessWidget {
     required this.dataSejarahPembayaran,
   }) : super(key: key);
 
-  Function(List<SejarahPembayaranObject> pembayaranBaru) onSave;
+  Function(BuildContext context, List<SejarahPembayaranObject> pembayaranBaru)
+      onSave;
   final String nama;
   final String id;
   List<SejarahPembayaranInvoiceObject> dataSejarahPembayaran;
+
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class TambahanPembayaranBS extends StatelessWidget {
       return 'Rp ${NumberFormat.decimalPattern().format(total).replaceAll(",", ".")}';
     }
 
-    final keteranganController = TextEditingController();
+    // final keteranganController = TextEditingController();
 
     dataSejarahPembayaran = dataSejarahPembayaran.where((element) {
       return element.lunas == false;
@@ -227,17 +230,17 @@ class TambahanPembayaranBS extends StatelessWidget {
                       ),
                     )),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: TextFormField(
-                  enabled: true,
-                  controller: keteranganController,
-                  decoration: InputDecoration(
-                    labelText: "Keterangan tambahan",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              //   child: TextFormField(
+              //     enabled: true,
+              //     controller: keteranganController,
+              //     decoration: InputDecoration(
+              //       labelText: "Keterangan tambahan",
+              //       border: OutlineInputBorder(),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 16),
               Expanded(child: Container()),
               Text(
@@ -258,18 +261,18 @@ class TambahanPembayaranBS extends StatelessWidget {
                   bayarCheckbox.forEach((element) {
                     if (element == true) {
                       dataPembayaranBaru.add(SejarahPembayaranObject(
-                          pembayaranBulan:
-                              dataSejarahPembayaran[index].pembayaranBulan,
-                          tanggalPembayaran:
-                              DateTime.now().toString().substring(0, 16),
-                          diterimaOleh: 'Mundzir',
-                          nominal: dataSejarahPembayaran[index].nominal,
-                          keterangan: keteranganController.text));
+                        pembayaranBulan:
+                            dataSejarahPembayaran[index].pembayaranBulan,
+                        tanggalPembayaran:
+                            DateTime.now().toString().substring(0, 16),
+                        diterimaOleh: 'Mundzir',
+                        nominal: dataSejarahPembayaran[index].nominal,
+                      ));
                     }
                     index++;
                   });
-                  onSave(dataPembayaranBaru);
-                  Navigator.pop(context);
+                  onSave(context, dataPembayaranBaru);
+                  Navigator.pop(context, "konfirmasi");
                 },
               ),
             ],

@@ -1,3 +1,5 @@
+import 'package:esantren_v1/AlertDialogs/KesehatanOptionsDialog.dart';
+import 'package:esantren_v1/AlertDialogs/PembayaranKonfirmasiDialog.dart';
 import 'package:esantren_v1/Classes/AbsenClass.dart';
 import 'package:esantren_v1/Objects/AbsenObject.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,11 @@ class BayarSpp1_MainScreen extends StatefulWidget {
 class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
   bool _isPressed = false;
   int selectedButtonIndex = 0;
+  List<SejarahPembayaranObject> _dataPembayaranBaru = [];
   final controller = TextEditingController();
+
+  String namaTerpilih = "";
+  String idTerpilih = "";
 
   List<AbsenObject> dataPembayaranSPP = AbsenClass().getData();
 
@@ -259,7 +265,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     : Colors.red.withOpacity(0.1)),
                             child: InkWell(
                               onTap: () {
-                                print(dataPembayaranSPP[index].id);
+                                namaTerpilih = dataPembayaranSPP[index].nama;
+                                idTerpilih = dataPembayaranSPP[index].id;
                                 sejarahPembayaran_BS(
                                     context,
                                     SejarahPembayaranClass(
@@ -269,6 +276,8 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     id: dataPembayaranSPP[index].id);
                               },
                               onLongPress: () {
+                                namaTerpilih = dataPembayaranSPP[index].nama;
+                                idTerpilih = dataPembayaranSPP[index].id;
                                 showModalBottomSheet(
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -285,7 +294,12 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                                       dataPembayaranSPP[index]
                                                           .id)
                                                   .getSejarahPembayaranInvoice());
-                                    });
+                                    }).then((value) {
+                                  if (value.toString() == "konfirmasi") {
+                                    print('this should open dialog');
+                                    openDialog(context);
+                                  }
+                                });
                                 // tambahPembayaran_BS(
                                 //     context,
                                 //     dataPembayaranSPP[index].nama,
@@ -376,7 +390,10 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
         ));
   }
 
-  void _onSave(List<SejarahPembayaranObject> pembayaranBaru) {
+  void _onSave(
+      BuildContext context, List<SejarahPembayaranObject> pembayaranBaru) {
+    _dataPembayaranBaru = pembayaranBaru;
+
     String bulanYangDibayar = "";
     int totalNominal = 0;
 
@@ -385,11 +402,25 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
       totalNominal += element.nominal!;
     });
 
+    String totalNominal_str =
+        'Rp ${NumberFormat.decimalPattern().format(totalNominal).replaceAll(",", ".")}';
     print(bulanYangDibayar.substring(0, bulanYangDibayar.length - 1).trim());
-    print(
-        'Rp ${NumberFormat.decimalPattern().format(totalNominal).replaceAll(",", ".")}');
+    print(totalNominal_str);
     String? bulanPembayaran = pembayaranBaru[0].pembayaranBulan;
     print(bulanPembayaran);
+
+    print('Starting action...');
+    assert(context != null);
+  }
+
+  void openDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return PembayaranKonfirmasiDialog("idTerpilih", "namaTerpilih",
+          //     "bulanYangDibayar", "totalNominal_str");
+          return KesehatanOptionsDialog("nama", true);
+        });
   }
 
   void searchSantri(String query, int selectedButtonIndex) {

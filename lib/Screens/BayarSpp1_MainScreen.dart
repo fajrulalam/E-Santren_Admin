@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/Classes/SejarahPembayaranClass.dart';
 import 'package:esantren_v1/Bottomsheets/PembayaranSejarah_BS.dart';
+import 'package:intl/intl.dart';
 
 import '../Bottomsheets/PembayaranTambahPembayaran_BS.dart';
+import '../Objects/SejarahPembayaranObject.dart';
 
 class BayarSpp1_MainScreen extends StatefulWidget {
   const BayarSpp1_MainScreen({Key? key}) : super(key: key);
@@ -275,6 +277,7 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return TambahanPembayaranBS(
+                                          onSave: _onSave,
                                           nama: dataPembayaranSPP[index].nama,
                                           id: dataPembayaranSPP[index].id,
                                           dataSejarahPembayaran:
@@ -371,6 +374,22 @@ class _BayarSpp1_MainScreenState extends State<BayarSpp1_MainScreen> {
             ),
           ),
         ));
+  }
+
+  void _onSave(List<SejarahPembayaranObject> pembayaranBaru) {
+    String bulanYangDibayar = "";
+    int totalNominal = 0;
+
+    pembayaranBaru.forEach((element) {
+      bulanYangDibayar += ' ${element.pembayaranBulan},';
+      totalNominal += element.nominal!;
+    });
+
+    print(bulanYangDibayar.substring(0, bulanYangDibayar.length - 1).trim());
+    print(
+        'Rp ${NumberFormat.decimalPattern().format(totalNominal).replaceAll(",", ".")}');
+    String? bulanPembayaran = pembayaranBaru[0].pembayaranBulan;
+    print(bulanPembayaran);
   }
 
   void searchSantri(String query, int selectedButtonIndex) {

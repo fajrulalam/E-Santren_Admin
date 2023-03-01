@@ -16,11 +16,13 @@ import 'package:intl/intl.dart';
 class TambahanPembayaranBS extends StatelessWidget {
   TambahanPembayaranBS({
     Key? key,
+    required this.onSave,
     required this.nama,
     required this.id,
     required this.dataSejarahPembayaran,
   }) : super(key: key);
 
+  Function(List<SejarahPembayaranObject> pembayaranBaru) onSave;
   final String nama;
   final String id;
   List<SejarahPembayaranInvoiceObject> dataSejarahPembayaran;
@@ -50,6 +52,8 @@ class TambahanPembayaranBS extends StatelessWidget {
 
       return 'Rp ${NumberFormat.decimalPattern().format(total).replaceAll(",", ".")}';
     }
+
+    final keteranganController = TextEditingController();
 
     dataSejarahPembayaran = dataSejarahPembayaran.where((element) {
       return element.lunas == false;
@@ -227,6 +231,7 @@ class TambahanPembayaranBS extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: TextFormField(
                   enabled: true,
+                  controller: keteranganController,
                   decoration: InputDecoration(
                     labelText: "Keterangan tambahan",
                     border: OutlineInputBorder(),
@@ -247,6 +252,23 @@ class TambahanPembayaranBS extends StatelessWidget {
                 child: Text("Save"),
                 onPressed: () {
                   // Add logic to save data and dismiss bottom sheet
+                  List<SejarahPembayaranObject> dataPembayaranBaru = [];
+                  print(bayarCheckbox.toString());
+                  int index = 0;
+                  bayarCheckbox.forEach((element) {
+                    if (element == true) {
+                      dataPembayaranBaru.add(SejarahPembayaranObject(
+                          pembayaranBulan:
+                              dataSejarahPembayaran[index].pembayaranBulan,
+                          tanggalPembayaran:
+                              DateTime.now().toString().substring(0, 16),
+                          diterimaOleh: 'Mundzir',
+                          nominal: dataSejarahPembayaran[index].nominal,
+                          keterangan: keteranganController.text));
+                    }
+                    index++;
+                  });
+                  onSave(dataPembayaranBaru);
                   Navigator.pop(context);
                 },
               ),

@@ -6,6 +6,7 @@ class SejarahPembayaranObject {
   String? tanggalPembayaran;
   String? keterangan;
   String? diterimaOleh;
+  int? nominal;
 
   SejarahPembayaranObject(
       {this.id,
@@ -13,6 +14,7 @@ class SejarahPembayaranObject {
       this.pembayaranBulan,
       this.tanggalPembayaran,
       this.keterangan,
+      this.nominal,
       this.diterimaOleh});
 }
 

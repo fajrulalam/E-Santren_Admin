@@ -4,6 +4,7 @@ import 'package:esantren_v1/CustomWidgets/PilihanKelasButton.dart';
 
 class Absensi1_PilihKelas extends StatefulWidget {
   const Absensi1_PilihKelas({Key? key}) : super(key: key);
+  static const String id = 'absensi';
 
   @override
   State<Absensi1_PilihKelas> createState() => _Absensi1_PilihKelasState();

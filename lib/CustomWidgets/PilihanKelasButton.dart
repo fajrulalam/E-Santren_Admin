@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:esantren_v1/Screens/Absensi2_Absensi.dart';
 
 class PilihanKelasButton extends StatelessWidget {
   String kelas;
@@ -10,7 +11,7 @@ class PilihanKelasButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/absensi2', arguments: kelas);
+        Navigator.pushNamed(context, Absensi2_Absensi.id, arguments: kelas);
       },
       child: Container(
         margin: EdgeInsets.only(top: 16),

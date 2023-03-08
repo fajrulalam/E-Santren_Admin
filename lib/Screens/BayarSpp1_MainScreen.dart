@@ -13,6 +13,7 @@ import '../Objects/SejarahPembayaranObject.dart';
 
 class BayarSpp1_MainScreen extends StatefulWidget {
   const BayarSpp1_MainScreen({Key? key}) : super(key: key);
+  static const String id = 'bayar-spp';
 
   @override
   State<BayarSpp1_MainScreen> createState() => _BayarSpp1_MainScreenState();

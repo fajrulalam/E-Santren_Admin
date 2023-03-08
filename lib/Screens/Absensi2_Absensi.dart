@@ -7,6 +7,7 @@ import 'package:esantren_v1/Objects/AbsenObject.dart';
 
 class Absensi2_Absensi extends StatefulWidget {
   final String kelas;
+  static const String id = 'absensi2';
 
   const Absensi2_Absensi({Key? key, this.kelas = 'lol'}) : super(key: key);
   // const Absensi2_Absensi({Key? key}) : super(key: key);

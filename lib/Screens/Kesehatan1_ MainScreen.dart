@@ -15,6 +15,7 @@ import '../AlertDialogs/SudahSembuhDialog.dart';
 
 class Kesehatan1_MainScreen extends StatefulWidget {
   const Kesehatan1_MainScreen({Key? key}) : super(key: key);
+  static const String id = 'kesehatan1';
 
   @override
   State<Kesehatan1_MainScreen> createState() => _Kesehatan1_MainScreenState();

@@ -3,6 +3,7 @@ import 'package:esantren_v1/Screens/Absensi1_PilihKelas.dart';
 import 'package:esantren_v1/Screens/Absensi2_Absensi.dart';
 import 'package:esantren_v1/Screens/BayarSpp1_MainScreen.dart';
 import 'package:esantren_v1/Screens/Kesehatan1_ MainScreen.dart';
+import 'package:esantren_v1/Screens/SantriBaru.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import './Screens/HomePage.dart';
@@ -38,9 +39,11 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 18))),
       initialRoute: WidgetTree.id,
+      locale: Locale('id'),
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
         WidgetTree.id: (context) => WidgetTree(),
+        SantiBaru_MainPage.id: (context) => SantiBaru_MainPage(),
         // HomePage.id: (context) => HomePage(user),
         Absensi1_PilihKelas.id: (context) => const Absensi1_PilihKelas(),
         Absensi2_Absensi.id: (context) => Absensi2_Absensi(),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esantren_v1/Classes/CurrentUserClass.dart';
 import 'package:esantren_v1/Objects/CurrentUserObject.dart';
 import 'package:esantren_v1/Screens/Absensi1_PilihKelas.dart';
+import 'package:esantren_v1/Screens/SantriBaru.dart';
 import 'package:esantren_v1/Screens/BayarSpp1_MainScreen.dart';
 import 'package:esantren_v1/Screens/Kesehatan1_%20MainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -229,9 +230,8 @@ class MainStatelessWidget extends StatelessWidget {
                       MainMenuButtons('Pulang', 'izin-pulang', '/'),
                       MainMenuButtons('Kesehatan', 'data-kesehatan',
                           Kesehatan1_MainScreen.id),
-                      Container(
-                        width: 70,
-                      )
+                      MainMenuButtons(
+                          'Santri Baru', 'santri-baru', SantiBaru_MainPage.id),
                     ],
                   ),
                 ),

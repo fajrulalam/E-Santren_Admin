@@ -84,7 +84,7 @@ void kesehatanDetail_BS(BuildContext context, String nama, String id,
                         initialValue: dirawatDi,
                         decoration: InputDecoration(
                           labelText: "Dirawat di",
-                          helperText: "mis: Demam, radang, diare",
+                          helperText: "mis: RSUM, Asrama, Rumah",
                           border: OutlineInputBorder(),
                         ),
                       ),

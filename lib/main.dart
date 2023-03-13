@@ -13,7 +13,7 @@ import 'package:esantren_v1/widget_tree.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: 'e-santren',
+      // name: 'e-santren',
       options: FirebaseOptions(
           apiKey: "AIzaSyBrdjIPSIhnQjZuiQ1DsRNFUngs0vXIF_4",
           appId: "1:385003370337:web:44c6fad4e10def2bd47720",

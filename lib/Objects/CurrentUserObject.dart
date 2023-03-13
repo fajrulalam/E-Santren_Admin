@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class CurrentUserObject {
   String? namaLengkap;
   String? namaPanggilan;

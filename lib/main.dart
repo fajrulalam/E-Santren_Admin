@@ -6,6 +6,7 @@ import 'package:esantren_v1/Screens/Kesehatan1_ MainScreen.dart';
 import 'package:esantren_v1/Screens/SantriBaru.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import './Screens/HomePage.dart';
 import './Screens/LoginPage.dart';
 import 'package:esantren_v1/widget_tree.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      supportedLocales: [Locale('id'), Locale('en', 'UK')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: ThemeData.light().copyWith(
           colorScheme:
               ThemeData().colorScheme.copyWith(primary: Colors.black87),

@@ -1,4 +1,5 @@
 import 'package:esantren_v1/Classes/DropDownValues.dart';
+import 'package:esantren_v1/Classes/SantriBaruClass.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -14,22 +15,21 @@ class SantiBaru_MainPage extends StatefulWidget {
 
 class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
   DateTime selectedDate = DateTime.now();
+  String nama = '';
+  String alamat = '';
+  String namaWali = '';
+  String noHP = '';
   String tglLahir = '';
   String kotaAsal = '';
   String jenjangPendidikan = '';
   String kelas = '';
-  String unitPendidikan = '';
+  String unitSekolah = '';
   String kamar = '';
   String kelasMengaji = '';
   late TextEditingController namaController;
   late TextEditingController alamatController;
   late TextEditingController waliSantriController;
   late TextEditingController noHPController;
-  late TextEditingController kotaAsalController;
-  late TextEditingController jenjangPendidikanController;
-  late TextEditingController unitPendidikanController;
-  late TextEditingController kamarController;
-  late TextEditingController kelasMengajiController;
 
   @override
   void initState() {
@@ -39,11 +39,6 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
     alamatController = TextEditingController();
     waliSantriController = TextEditingController();
     noHPController = TextEditingController();
-    kotaAsalController = TextEditingController();
-    jenjangPendidikanController = TextEditingController();
-    unitPendidikanController = TextEditingController();
-    kamarController = TextEditingController();
-    kelasMengajiController = TextEditingController();
   }
 
   @override
@@ -133,6 +128,7 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                               print('tapped');
                               // controllerNama.text = 'lol';
                               showDatePicker(
+                                locale: Locale('id'),
                                 context: context,
                                 initialDate: selectedDate,
                                 firstDate: DateTime(1900),
@@ -189,7 +185,9 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                         )),
                   ),
                   onChanged: (value) {
-                    print(value);
+                    if (value != null) {
+                      kotaAsal = value;
+                    }
                   },
                 ),
                 SizedBox(height: sizedBoxHeight),
@@ -213,7 +211,11 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                                 ),
                               )),
                         ),
-                        onChanged: print,
+                        onChanged: (value) {
+                          if (value != null) {
+                            jenjangPendidikan = value;
+                          }
+                        },
                       ),
                     ),
                     SizedBox(width: sizedBoxHeight),
@@ -235,7 +237,11 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                                 ),
                               )),
                         ),
-                        onChanged: print,
+                        onChanged: (value) {
+                          if (value != null) {
+                            kelas = value;
+                          }
+                        },
                       ),
                     ),
                   ],
@@ -258,7 +264,11 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                           ),
                         )),
                   ),
-                  onChanged: print,
+                  onChanged: (value) {
+                    if (value != null) {
+                      unitSekolah = value;
+                    }
+                  },
                 ),
                 SizedBox(height: sizedBoxHeight),
                 Row(
@@ -281,7 +291,11 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                                 ),
                               )),
                         ),
-                        onChanged: print,
+                        onChanged: (value) {
+                          if (value != null) {
+                            kamar = value;
+                          }
+                        },
                       ),
                     ),
                     SizedBox(width: sizedBoxHeight),
@@ -303,7 +317,11 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                                 ),
                               )),
                         ),
-                        onChanged: print,
+                        onChanged: (value) {
+                          if (value != null) {
+                            kelasMengaji = value;
+                          }
+                        },
                       ),
                     ),
                   ],
@@ -314,9 +332,44 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
                     Expanded(
                       child: ElevatedButton(
                           onPressed: () {
-                            print(namaController.text);
+                            nama = namaController.text;
+                            alamat = alamatController.text;
+                            namaWali = waliSantriController.text;
+                            noHP = noHPController.text;
+                            print('Nama ${namaController.text}');
+                            print('Alamat ${alamatController.text}');
+                            print(
+                                'waliSantriController ${waliSantriController.text}');
+                            print('noHPController ${noHPController.text}');
+                            print(
+                                'waliSantriController ${waliSantriController.text}');
+                            print('kotaAsal $kotaAsal');
+                            print('jenjangPendidikan $jenjangPendidikan');
+                            print('kelas $kelas');
+                            print('unitPendidikan $unitSekolah');
+                            print('kamar $kamar');
+                            print('kelasMengaji $kelasMengaji');
+
+                            SantriBaru santriBaru = SantriBaru.named(
+                                nama,
+                                alamat,
+                                noHP,
+                                tglLahir,
+                                kotaAsal,
+                                namaWali,
+                                kelas,
+                                jenjangPendidikan,
+                                unitSekolah,
+                                kamar,
+                                kelasMengaji);
+
+                            santriBaru.addToFirebase(context, santriBaru);
                           },
-                          child: Text('Simpan Data Santri')),
+                          child: Text(
+                            'Simpan Data Santri',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
                     SizedBox(height: sizedBoxHeight),
                   ],

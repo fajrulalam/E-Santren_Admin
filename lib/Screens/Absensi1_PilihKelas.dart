@@ -20,45 +20,50 @@ class _Absensi1_PilihKelasState extends State<Absensi1_PilihKelas> {
           color: Colors.grey,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'SMA',
-              style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black54),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 800),
+          child: Padding(
+            padding: EdgeInsets.all(30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                PilihanKelasButton('X'),
-                PilihanKelasButton('XI'),
-                PilihanKelasButton('XII'),
+                Text(
+                  'SMA',
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.black54),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PilihanKelasButton('X'),
+                    PilihanKelasButton('XI'),
+                    PilihanKelasButton('XII'),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: Text(
+                    'SMP',
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: Colors.black54),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PilihanKelasButton('VII'),
+                    PilihanKelasButton('VII'),
+                    PilihanKelasButton('IX'),
+                  ],
+                ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: Text(
-                'SMP',
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Colors.black54),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                PilihanKelasButton('VII'),
-                PilihanKelasButton('VII'),
-                PilihanKelasButton('IX'),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -58,218 +58,247 @@ class _Absensi2_AbsensiState extends State<Absensi2_Absensi> {
           color: Colors.grey,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(top: 30, bottom: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 16, bottom: 8),
-              child: Text(
-                'Pilihan Kamar',
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                    fontSize: 16),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            SizedBox(
-              height: 40,
-              child: ListView.builder(
-                itemBuilder: (context, int index) {
-                  Color color = Colors.white;
-                  if (index == _selectedIndex) {
-                    color = Colors.blue.withOpacity(0.8);
-                  }
-                  return PilihanKamarButton(
-                      color,
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            jumlahSantriDiKamar =
-                                absenBrain.getJumlahSantriDiKamar(
-                                    nomorKamar[index], dataSantri);
-                            _selectedIndex = index;
-                            print('Data Santri ${dataSantri.toString()}');
-                            print('Kamar yang dipilih: ${nomorKamar[index]}');
-                            print(
-                                'Jumlah santri di kamar: $jumlahSantriDiKamar');
-                            dataSantriSesuaiKamar.clear();
-                            dataSantri.forEach((element) {
-                              if (element.kamar == nomorKamar[index]) {
-                                dataSantriSesuaiKamar.add(element);
-                              }
-                            });
-                          });
-                        },
-                        child: Center(
-                          child: Text('${nomorKamar[index]}',
-                              style: GoogleFonts.raleway(
-                                  color: index == _selectedIndex
-                                      ? Colors.white
-                                      : null,
-                                  fontWeight: index == _selectedIndex
-                                      ? FontWeight.bold
-                                      : null)),
-                        ),
-                      ));
-                },
-                scrollDirection: Axis.horizontal,
-                itemCount: nomorKamar.length,
-              ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemBuilder: (context, int index) {
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 6, left: 16, right: 16),
-                      child: Ink(
-                        height: 90,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: decideBorderColor(
-                                    dataSantriSesuaiKamar[index]
-                                        .statusKehadiran),
-                                width: 2),
-                            borderRadius: BorderRadius.circular(20),
-                            color: decideBackgroudColor(
-                                dataSantriSesuaiKamar[index].statusKehadiran)),
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              int indexOfClicked = dataSantri
-                                  .indexOf(dataSantriSesuaiKamar[index]);
-
-                              String currentKehadiranStatus =
-                                  dataSantri[indexOfClicked].statusKehadiran;
-                              print(currentKehadiranStatus);
-
-                              if (currentKehadiranStatus == 'Hadir') {
-                                dataSantri[indexOfClicked].statusKehadiran =
-                                    'Alfa';
-                                dataSantriSesuaiKamar[index].statusKehadiran =
-                                    'Alfa';
-                              } else {
-                                dataSantri[indexOfClicked].statusKehadiran =
-                                    'Hadir';
-                                dataSantriSesuaiKamar[index].statusKehadiran =
-                                    'Hadir';
-                              }
-
-                              // dataSantriSesuaiKamar.clear();
-                              // dataSantri.forEach((element) {
-                              //   if (element.kamar == nomorKamar[index]) {
-                              //     dataSantriSesuaiKamar.add(element);
-                              //   }
-                              // });
-                            });
-                          },
-                          onLongPress: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AbsensiAlertDialog('test',
-                                      dataSantriSesuaiKamar[index].nama);
-                                }).then((value) {
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3))
+              ]),
+          constraints: BoxConstraints(maxWidth: 800),
+          child: Padding(
+            padding: EdgeInsets.only(top: 30, bottom: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  child: Text(
+                    'Pilihan Kamar',
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 16),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  child: ListView.builder(
+                    itemBuilder: (context, int index) {
+                      Color color = Colors.white;
+                      if (index == _selectedIndex) {
+                        color = Colors.blue.withOpacity(0.8);
+                      }
+                      return PilihanKamarButton(
+                          color,
+                          InkWell(
+                            onTap: () {
                               setState(() {
-                                int indexOfClicked = dataSantri
-                                    .indexOf(dataSantriSesuaiKamar[index]);
-                                dataSantri[indexOfClicked].statusKehadiran =
-                                    value;
-                                dataSantriSesuaiKamar[index].statusKehadiran =
-                                    value;
+                                jumlahSantriDiKamar =
+                                    absenBrain.getJumlahSantriDiKamar(
+                                        nomorKamar[index], dataSantri);
+                                _selectedIndex = index;
+                                print('Data Santri ${dataSantri.toString()}');
+                                print(
+                                    'Kamar yang dipilih: ${nomorKamar[index]}');
+                                print(
+                                    'Jumlah santri di kamar: $jumlahSantriDiKamar');
+                                dataSantriSesuaiKamar.clear();
+                                dataSantri.forEach((element) {
+                                  if (element.kamar == nomorKamar[index]) {
+                                    dataSantriSesuaiKamar.add(element);
+                                  }
+                                });
                               });
-                            });
-                          },
-                          child: Stack(
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  dataSantriSesuaiKamar[index].id,
-                                  style: GoogleFonts.sourceSansPro(
-                                      fontSize: 14, color: Colors.black54),
-                                ),
-                                margin: EdgeInsets.only(left: 16, top: 12),
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  dataSantriSesuaiKamar[index].nama,
-                                  maxLines: 2,
+                            },
+                            child: Center(
+                              child: Text('${nomorKamar[index]}',
                                   style: GoogleFonts.raleway(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                margin: EdgeInsets.only(left: 16, top: 16),
-                              ),
-                              Container(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AbsensiAlertDialog(
-                                              'test',
-                                              dataSantriSesuaiKamar[index]
-                                                  .nama);
-                                        }).then((value) {
-                                      setState(() {
-                                        int indexOfClicked = dataSantri.indexOf(
-                                            dataSantriSesuaiKamar[index]);
+                                      color: index == _selectedIndex
+                                          ? Colors.white
+                                          : null,
+                                      fontWeight: index == _selectedIndex
+                                          ? FontWeight.bold
+                                          : null)),
+                            ),
+                          ));
+                    },
+                    scrollDirection: Axis.horizontal,
+                    itemCount: nomorKamar.length,
+                  ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      itemBuilder: (context, int index) {
+                        return Container(
+                          margin:
+                              EdgeInsets.only(bottom: 6, left: 16, right: 16),
+                          child: Material(
+                            child: Ink(
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: decideBorderColor(
+                                          dataSantriSesuaiKamar[index]
+                                              .statusKehadiran),
+                                      width: 2),
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: decideBackgroudColor(
+                                      dataSantriSesuaiKamar[index]
+                                          .statusKehadiran)),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    int indexOfClicked = dataSantri
+                                        .indexOf(dataSantriSesuaiKamar[index]);
+
+                                    String currentKehadiranStatus =
                                         dataSantri[indexOfClicked]
-                                            .statusKehadiran = value;
-                                        dataSantriSesuaiKamar[index]
-                                            .statusKehadiran = value;
-                                      });
+                                            .statusKehadiran;
+                                    print(currentKehadiranStatus);
+
+                                    if (currentKehadiranStatus == 'Hadir') {
+                                      dataSantri[indexOfClicked]
+                                          .statusKehadiran = 'Alfa';
+                                      dataSantriSesuaiKamar[index]
+                                          .statusKehadiran = 'Alfa';
+                                    } else {
+                                      dataSantri[indexOfClicked]
+                                          .statusKehadiran = 'Hadir';
+                                      dataSantriSesuaiKamar[index]
+                                          .statusKehadiran = 'Hadir';
+                                    }
+
+                                    // dataSantriSesuaiKamar.clear();
+                                    // dataSantri.forEach((element) {
+                                    //   if (element.kamar == nomorKamar[index]) {
+                                    //     dataSantriSesuaiKamar.add(element);
+                                    //   }
+                                    // });
+                                  });
+                                },
+                                onLongPress: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AbsensiAlertDialog('test',
+                                            dataSantriSesuaiKamar[index].nama);
+                                      }).then((value) {
+                                    setState(() {
+                                      int indexOfClicked = dataSantri.indexOf(
+                                          dataSantriSesuaiKamar[index]);
+                                      dataSantri[indexOfClicked]
+                                          .statusKehadiran = value;
+                                      dataSantriSesuaiKamar[index]
+                                          .statusKehadiran = value;
                                     });
-                                    ;
-                                  },
-                                  child: Text(
-                                    dataSantriSesuaiKamar[index]
-                                        .statusKehadiran,
-                                    maxLines: 1,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: dataSantriSesuaiKamar[index]
-                                                    .statusKehadiran ==
-                                                'Hadir'
-                                            ? Color(0xFF0E5805)
-                                            : Colors.black.withOpacity(0.8)),
-                                  ),
+                                  });
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        dataSantriSesuaiKamar[index].id,
+                                        style: GoogleFonts.sourceSansPro(
+                                            fontSize: 14,
+                                            color: Colors.black54),
+                                      ),
+                                      margin:
+                                          EdgeInsets.only(left: 16, top: 12),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        dataSantriSesuaiKamar[index].nama,
+                                        maxLines: 2,
+                                        style: GoogleFonts.raleway(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      margin:
+                                          EdgeInsets.only(left: 16, top: 16),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.topRight,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AbsensiAlertDialog(
+                                                    'test',
+                                                    dataSantriSesuaiKamar[index]
+                                                        .nama);
+                                              }).then((value) {
+                                            setState(() {
+                                              int indexOfClicked =
+                                                  dataSantri.indexOf(
+                                                      dataSantriSesuaiKamar[
+                                                          index]);
+                                              dataSantri[indexOfClicked]
+                                                  .statusKehadiran = value;
+                                              dataSantriSesuaiKamar[index]
+                                                  .statusKehadiran = value;
+                                            });
+                                          });
+                                          ;
+                                        },
+                                        child: Text(
+                                          dataSantriSesuaiKamar[index]
+                                              .statusKehadiran,
+                                          maxLines: 1,
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: dataSantriSesuaiKamar[
+                                                              index]
+                                                          .statusKehadiran ==
+                                                      'Hadir'
+                                                  ? Color(0xFF0E5805)
+                                                  : Colors.black
+                                                      .withOpacity(0.8)),
+                                        ),
+                                      ),
+                                      margin:
+                                          EdgeInsets.only(right: 16, top: 12),
+                                    ),
+                                  ],
                                 ),
-                                margin: EdgeInsets.only(right: 16, top: 12),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                    ;
-                  },
-                  itemCount: jumlahSantriDiKamar),
-            )
-            // Container(
-            //   margin: EdgeInsets.only(bottom: 6, left: 16, right: 16),
-            //   child: Ink(
-            //     height: 90,
-            //     decoration: BoxDecoration(
-            //         border: Border.all(color: Colors.grey, width: 2),
-            //         borderRadius: BorderRadius.circular(20),
-            //         color: Colors.grey.withOpacity(0.4)),
-            //     child: InkWell(
-            //       onTap: () {},
-            //     ),
-            //   ),
-            // ),
-          ],
+                        );
+                        ;
+                      },
+                      itemCount: jumlahSantriDiKamar),
+                )
+                // Container(
+                //   margin: EdgeInsets.only(bottom: 6, left: 16, right: 16),
+                //   child: Ink(
+                //     height: 90,
+                //     decoration: BoxDecoration(
+                //         border: Border.all(color: Colors.grey, width: 2),
+                //         borderRadius: BorderRadius.circular(20),
+                //         color: Colors.grey.withOpacity(0.4)),
+                //     child: InkWell(
+                //       onTap: () {},
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
         ),
       ),
     );

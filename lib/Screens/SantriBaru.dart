@@ -53,330 +53,369 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
           color: Colors.grey,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(top: 16, bottom: 1, left: 8, right: 8),
+      body: Center(
         child: Container(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Masukkan Data Santri',
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black87),
-                ),
-                SizedBox(height: sizedBoxHeight),
-                TextFormField(
-                  textInputAction: TextInputAction.next,
-                  controller: namaController,
-                  decoration: InputDecoration(
-                    labelText: 'Nama Lengkap',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: sizedBoxHeight),
-                TextFormField(
-                  controller: alamatController,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    labelText: 'Alamat Rumah',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: sizedBoxHeight),
-                TextFormField(
-                  controller: waliSantriController,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    labelText: 'Wali Santri',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: sizedBoxHeight),
-                Row(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3))
+              ]),
+          constraints: BoxConstraints(maxWidth: 800),
+          child: Padding(
+            padding: EdgeInsets.only(top: 24, bottom: 24, left: 24, right: 24),
+            child: Container(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: noHPController,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Nomor Telpon',
-                          border: OutlineInputBorder(),
-                        ),
+                    Text(
+                      'Masukkan Data Santri',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black87),
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    TextFormField(
+                      textInputAction: TextInputAction.next,
+                      controller: namaController,
+                      decoration: InputDecoration(
+                        labelText: 'Nama Lengkap',
+                        border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(width: sizedBoxHeight),
-                    Expanded(
-                      child: TextFormField(
-                        textInputAction: TextInputAction.next,
-                        readOnly: true,
-                        controller: TextEditingController(text: tglLahir),
-                        decoration: InputDecoration(
-                          labelText: 'Tanggal Lahir',
-                          border: OutlineInputBorder(),
-                          suffix: GestureDetector(
-                            child: Icon(
-                              Icons.calendar_today,
-                              size: 24,
+                    SizedBox(height: sizedBoxHeight),
+                    TextFormField(
+                      controller: alamatController,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        labelText: 'Alamat Rumah',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    TextFormField(
+                      controller: waliSantriController,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        labelText: 'Wali Santri',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: noHPController,
+                            textInputAction: TextInputAction.next,
+                            decoration: InputDecoration(
+                              labelText: 'Nomor Telpon',
+                              border: OutlineInputBorder(),
                             ),
-                            onTap: () {
-                              print('tapped');
-                              // controllerNama.text = 'lol';
-                              showDatePicker(
-                                locale: Locale('id'),
-                                context: context,
-                                initialDate: selectedDate,
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                                builder: (BuildContext context, Widget? child) {
-                                  return Theme(
-                                    data: ThemeData.light().copyWith(
-                                      colorScheme: ColorScheme.light(
-                                        primary: Colors.blue,
-                                      ),
-                                    ),
-                                    child: child!,
-                                  );
-                                },
-                              ).then((picked) {
-                                if (picked != null && picked != selectedDate) {
-                                  final DateFormat formatter =
-                                      DateFormat('dd-MM-yyyy');
-                                  final String formattedDate =
-                                      formatter.format(picked);
-                                  setState(() {
-                                    tglLahir = formattedDate;
-                                  });
-                                  // controllerTglLahir.text = tglLahir;
+                          ),
+                        ),
+                        SizedBox(width: sizedBoxHeight),
+                        Expanded(
+                          child: TextFormField(
+                            textInputAction: TextInputAction.next,
+                            readOnly: true,
+                            controller: TextEditingController(text: tglLahir),
+                            decoration: InputDecoration(
+                              labelText: 'Tanggal Lahir',
+                              border: OutlineInputBorder(),
+                              suffix: GestureDetector(
+                                child: Icon(
+                                  Icons.calendar_today,
+                                  size: 24,
+                                ),
+                                onTap: () {
+                                  print('tapped');
+                                  // controllerNama.text = 'lol';
+                                  showDatePicker(
+                                    locale: Locale('id'),
+                                    context: context,
+                                    initialDate: selectedDate,
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime(2100),
+                                    builder:
+                                        (BuildContext context, Widget? child) {
+                                      return Theme(
+                                        data: ThemeData.light().copyWith(
+                                          colorScheme: ColorScheme.light(
+                                            primary: Colors.blue,
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
+                                    },
+                                  ).then((picked) {
+                                    if (picked != null &&
+                                        picked != selectedDate) {
+                                      final DateFormat formatter =
+                                          DateFormat('dd-MM-yyyy');
+                                      final String formattedDate =
+                                          formatter.format(picked);
+                                      setState(() {
+                                        tglLahir = formattedDate;
+                                      });
+                                      // controllerTglLahir.text = tglLahir;
 
-                                  // tglLahir = formattedDate;
-                                }
-                              });
+                                      // tglLahir = formattedDate;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            // readOnly: true,
+                            // initialValue: controllerTglLahir.text,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    DropdownSearch<String>(
+                      popupProps: PopupProps.menu(
+                        showSelectedItems: true,
+                        showSearchBox: true,
+                      ),
+                      items: DropdownValues.getDataKota(),
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                            labelText: "Kota Asal",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.0,
+                              ),
+                            )),
+                      ),
+                      onChanged: (value) {
+                        if (value != null) {
+                          kotaAsal = value;
+                        }
+                      },
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DropdownSearch<String>(
+                            popupProps: PopupProps.menu(
+                              showSelectedItems: true,
+                              showSearchBox: false,
+                            ),
+                            items: ['SD', 'SLTP', 'SLTA'],
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Jenjang Pendidikan",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1.0,
+                                    ),
+                                  )),
+                            ),
+                            onChanged: (value) {
+                              if (value != null) {
+                                jenjangPendidikan = value;
+                              }
                             },
                           ),
                         ),
-                        // readOnly: true,
-                        // initialValue: controllerTglLahir.text,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: sizedBoxHeight),
-                DropdownSearch<String>(
-                  popupProps: PopupProps.menu(
-                    showSelectedItems: true,
-                    showSearchBox: true,
-                  ),
-                  items: DropdownValues.getDataKota(),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        labelText: "Kota Asal",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 1.0,
+                        SizedBox(width: sizedBoxHeight),
+                        Expanded(
+                          child: DropdownSearch<String>(
+                            popupProps: PopupProps.menu(
+                              showSelectedItems: true,
+                              showSearchBox: false,
+                            ),
+                            items: ['SD', 'VII', 'VII', 'IX', 'X', 'XI', 'XII'],
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Kelas",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1.0,
+                                    ),
+                                  )),
+                            ),
+                            onChanged: (value) {
+                              if (value != null) {
+                                kelas = value;
+                              }
+                            },
                           ),
-                        )),
-                  ),
-                  onChanged: (value) {
-                    if (value != null) {
-                      kotaAsal = value;
-                    }
-                  },
-                ),
-                SizedBox(height: sizedBoxHeight),
-                Row(
-                  children: [
-                    Expanded(
-                      child: DropdownSearch<String>(
-                        popupProps: PopupProps.menu(
-                          showSelectedItems: true,
-                          showSearchBox: false,
                         ),
-                        items: ['SD', 'SLTP', 'SLTA'],
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              labelText: "Jenjang Pendidikan",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                              )),
-                        ),
-                        onChanged: (value) {
-                          if (value != null) {
-                            jenjangPendidikan = value;
-                          }
-                        },
-                      ),
-                    ),
-                    SizedBox(width: sizedBoxHeight),
-                    Expanded(
-                      child: DropdownSearch<String>(
-                        popupProps: PopupProps.menu(
-                          showSelectedItems: true,
-                          showSearchBox: false,
-                        ),
-                        items: ['SD', 'VII', 'VII', 'IX', 'X', 'XI', 'XII'],
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              labelText: "Kelas",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                              )),
-                        ),
-                        onChanged: (value) {
-                          if (value != null) {
-                            kelas = value;
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: sizedBoxHeight),
-                DropdownSearch<String>(
-                  popupProps: PopupProps.menu(
-                    showSelectedItems: true,
-                    showSearchBox: true,
-                  ),
-                  items: DropdownValues.getUnitPendidikan(),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        labelText: "Unit Pendidikan",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 1.0,
-                          ),
-                        )),
-                  ),
-                  onChanged: (value) {
-                    if (value != null) {
-                      unitSekolah = value;
-                    }
-                  },
-                ),
-                SizedBox(height: sizedBoxHeight),
-                Row(
-                  children: [
-                    Expanded(
-                      child: DropdownSearch<String>(
-                        popupProps: PopupProps.menu(
-                          showSelectedItems: true,
-                          showSearchBox: true,
-                        ),
-                        items: DropdownValues.getDataKamar(),
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              labelText: "Kamar",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                              )),
-                        ),
-                        onChanged: (value) {
-                          if (value != null) {
-                            kamar = value;
-                          }
-                        },
-                      ),
-                    ),
-                    SizedBox(width: sizedBoxHeight),
-                    Expanded(
-                      child: DropdownSearch<String>(
-                        popupProps: PopupProps.menu(
-                          showSelectedItems: true,
-                          showSearchBox: true,
-                        ),
-                        items: DropdownValues.getKelasMengaji(),
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              labelText: "Kelas Mengaji",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                ),
-                              )),
-                        ),
-                        onChanged: (value) {
-                          if (value != null) {
-                            kelasMengaji = value;
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: sizedBoxHeight),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            nama = namaController.text;
-                            alamat = alamatController.text;
-                            namaWali = waliSantriController.text;
-                            noHP = noHPController.text;
-                            print('Nama ${namaController.text}');
-                            print('Alamat ${alamatController.text}');
-                            print(
-                                'waliSantriController ${waliSantriController.text}');
-                            print('noHPController ${noHPController.text}');
-                            print(
-                                'waliSantriController ${waliSantriController.text}');
-                            print('kotaAsal $kotaAsal');
-                            print('jenjangPendidikan $jenjangPendidikan');
-                            print('kelas $kelas');
-                            print('unitPendidikan $unitSekolah');
-                            print('kamar $kamar');
-                            print('kelasMengaji $kelasMengaji');
-
-                            SantriBaru santriBaru = SantriBaru.named(
-                                nama,
-                                alamat,
-                                noHP,
-                                tglLahir,
-                                kotaAsal,
-                                namaWali,
-                                kelas,
-                                jenjangPendidikan,
-                                unitSekolah,
-                                kamar,
-                                kelasMengaji);
-
-                            santriBaru.addToFirebase(context, santriBaru);
-                          },
-                          child: Text(
-                            'Simpan Data Santri',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold),
-                          )),
+                      ],
                     ),
                     SizedBox(height: sizedBoxHeight),
+                    DropdownSearch<String>(
+                      popupProps: PopupProps.menu(
+                        showSelectedItems: true,
+                        showSearchBox: true,
+                      ),
+                      items: DropdownValues.getUnitPendidikan(),
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                            labelText: "Unit Pendidikan",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.0,
+                              ),
+                            )),
+                      ),
+                      onChanged: (value) {
+                        if (value != null) {
+                          unitSekolah = value;
+                        }
+                      },
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DropdownSearch<String>(
+                            popupProps: PopupProps.menu(
+                              showSelectedItems: true,
+                              showSearchBox: true,
+                            ),
+                            items: DropdownValues.getDataKamar(),
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Kamar",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1.0,
+                                    ),
+                                  )),
+                            ),
+                            onChanged: (value) {
+                              if (value != null) {
+                                kamar = value;
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(width: sizedBoxHeight),
+                        Expanded(
+                          child: DropdownSearch<String>(
+                            popupProps: PopupProps.menu(
+                              showSelectedItems: true,
+                              showSearchBox: true,
+                            ),
+                            items: DropdownValues.getKelasMengaji(),
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Kelas Mengaji",
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1.0,
+                                    ),
+                                  )),
+                            ),
+                            onChanged: (value) {
+                              if (value != null) {
+                                kelasMengaji = value;
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: sizedBoxHeight),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                              onPressed: () {
+                                nama = namaController.text;
+                                alamat = alamatController.text;
+                                namaWali = waliSantriController.text;
+                                noHP = noHPController.text;
+                                print('Nama ${namaController.text}');
+                                print('Alamat ${alamatController.text}');
+                                print(
+                                    'waliSantriController ${waliSantriController.text}');
+                                print('noHPController ${noHPController.text}');
+                                print(
+                                    'waliSantriController ${waliSantriController.text}');
+                                print('kotaAsal $kotaAsal');
+                                print('jenjangPendidikan $jenjangPendidikan');
+                                print('kelas $kelas');
+                                print('unitPendidikan $unitSekolah');
+                                print('kamar $kamar');
+                                print('kelasMengaji $kelasMengaji');
+
+                                if (nama == '' ||
+                                    alamat == '' ||
+                                    namaWali == '' ||
+                                    noHP == '' ||
+                                    kotaAsal == '' ||
+                                    kotaAsal == '' ||
+                                    kelas == '' ||
+                                    kamar == '' ||
+                                    kelasMengaji == '') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor:
+                                          Colors.red.withOpacity(0.8),
+                                      duration: Duration(milliseconds: 1000),
+                                      content: Text(
+                                          'Mohon lengkapi data terlebih dahulu',
+                                          style: GoogleFonts.poppins()),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                SantriBaru santriBaru = SantriBaru.named(
+                                    nama,
+                                    alamat,
+                                    noHP,
+                                    tglLahir,
+                                    kotaAsal,
+                                    namaWali,
+                                    kelas,
+                                    jenjangPendidikan,
+                                    unitSekolah,
+                                    kamar,
+                                    kelasMengaji);
+
+                                santriBaru.addToFirebase(context, santriBaru);
+                              },
+                              child: Text(
+                                'Simpan Data Santri',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500),
+                              )),
+                        ),
+                        SizedBox(height: sizedBoxHeight),
+                      ],
+                    ),
+                    SizedBox(height: sizedBoxHeight + 8),
                   ],
                 ),
-                SizedBox(height: sizedBoxHeight + 8),
-              ],
+              ),
             ),
           ),
         ),

@@ -75,104 +75,107 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Form(
                   key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Card(
-                        elevation: 4.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24.0)),
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'images/hello_santri.png', // replace this with your image asset path
-                                height: 200, // adjust the height as needed
-                              ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    border: OutlineInputBorder()),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your email';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: _obscurePassword,
-                                decoration: InputDecoration(
-                                  labelText: 'Password',
-                                  border: OutlineInputBorder(),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(_obscurePassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscurePassword = !_obscurePassword;
-                                      });
-                                    },
-                                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Card(
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24.0)),
+                          child: Container(
+                            constraints: BoxConstraints(maxWidth: 800),
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'images/hello_santri.png', // replace this with your image asset path
+                                  height: 200, // adjust the height as needed
                                 ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(errorMessage,
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.red,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400)),
-                              )
-                            ],
+                                SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: _emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                      labelText: 'Email',
+                                      border: OutlineInputBorder()),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: _obscurePassword,
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                    border: OutlineInputBorder(),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(_obscurePassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obscurePassword = !_obscurePassword;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your password';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(errorMessage,
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.red,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400)),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 32.0),
-                      ElevatedButton(
-                        onPressed: () {
-                          signInWithEmailAndPassword();
+                        SizedBox(height: 32.0),
+                        ElevatedButton(
+                          onPressed: () {
+                            signInWithEmailAndPassword();
 
-                          // if (_formKey.currentState!.validate()) {
-                          //   // TODO: Perform login with email and password
-                          // }
-                        },
-                        child: Text(
-                          'Login',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                            // if (_formKey.currentState!.validate()) {
+                            //   // TODO: Perform login with email and password
+                            // }
+                          },
+                          child: Text(
+                            'Login',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 16.0),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Don\'t have an account? ',
-                          style: TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(
-                              text: 'Register',
-                              style: GoogleFonts.poppins(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w600,
+                        SizedBox(height: 16.0),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Don\'t have an account? ',
+                            style: TextStyle(color: Colors.black),
+                            children: [
+                              TextSpan(
+                                text: 'Register',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

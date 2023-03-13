@@ -11,14 +11,16 @@ class PilihanKamarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 6),
-      child: Ink(
-          width: 80,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            color: color,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: inkwell),
+      child: Material(
+        child: Ink(
+            width: 80,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              color: color,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: inkwell),
+      ),
     );
   }
 }

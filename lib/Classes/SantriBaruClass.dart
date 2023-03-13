@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:esantren_v1/Screens/SantriBaru.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SantriBaru {
   String nama;
@@ -44,7 +46,8 @@ class SantriBaru {
             children: [
               CircularProgressIndicator(),
               SizedBox(width: 16),
-              Text("Signing in...")
+              Text("Menyimpan...",
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.w700))
             ],
           ),
         );
@@ -79,10 +82,12 @@ class SantriBaru {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(milliseconds: 750),
+          backgroundColor: Colors.green,
+          duration: Duration(milliseconds: 1500),
           content: Text('Sdr. ${santriBaru.nama} berhasil ditambahkan'),
         ),
       );
+      Navigator.popAndPushNamed(context, SantiBaru_MainPage.id);
     }).catchError((error) => print('Add failed: $error'));
   }
 

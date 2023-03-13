@@ -6,6 +6,7 @@ import 'package:esantren_v1/Screens/SantriBaru.dart';
 import 'package:esantren_v1/Screens/BayarSpp1_MainScreen.dart';
 import 'package:esantren_v1/Screens/Kesehatan1_%20MainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:esantren_v1/CustomWidgets/MainMenuButtons.dart';
@@ -79,7 +80,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("eSantren"),
       ),
-      body: body,
+      body: Center(
+          child: Container(
+        child: body,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3))
+            ]),
+        constraints: BoxConstraints(maxWidth: 800, maxHeight: 800),
+      )),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -277,15 +292,18 @@ class AccountSettings extends StatelessWidget {
     print(currentUserObject.namaPanggilan);
     print(currentUserObject.namaPanggilan);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ElevatedButton(
-            onPressed: () {
-              _signOut();
-            },
-            child: Text('Sign-Out'))
-      ],
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 36),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                _signOut();
+              },
+              child: Text('Sign-Out'))
+        ],
+      ),
     );
   }
 }

@@ -32,7 +32,9 @@ class SantriBaru {
       this.kamar,
       this.kelasMengaji);
 
-  void addToFirebase(BuildContext context, SantriBaru santriBaru) {
+  void addToFirebase(BuildContext context, SantriBaru santriBaru) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -49,18 +51,11 @@ class SantriBaru {
       },
     );
     String kodeAsrama = 'DU15';
-    String kodeTahun = '';
-    switch (santriBaru.kelas) {
-      case "VII":
-      case "X":
-        kodeTahun = '22';
-        break;
-      default:
-        kodeTahun = '23';
-        break;
-    }
-    String kodeAbsen = '0001TEST';
-    String id = kodeAsrama + kodeTahun + kodeAbsen;
+    String kodeTahun = DateTime.now().year.toString().substring(2);
+    int kodeAbsen = await getCurrentId() + 1;
+    String kodeAbsen_str = kodeAbsen.toString().padLeft(6, '0');
+
+    String id = kodeAsrama + kodeTahun + kodeAbsen_str;
     Map<String, Object> dataSantriBaru = {
       "nama": santriBaru.nama,
       "alamat": santriBaru.alamat,
@@ -80,8 +75,6 @@ class SantriBaru {
       "pembayaranTerakhir": "-"
     };
 
-    FirebaseFirestore db = FirebaseFirestore.instance;
-
     db.collection('SantriCollection').doc(id).set(dataSantriBaru).then((value) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -93,16 +86,22 @@ class SantriBaru {
     }).catchError((error) => print('Add failed: $error'));
   }
 
-  Future<int> getCurrentId() async {
+  static Future<int> getCurrentId() async {
     CollectionReference users =
         FirebaseFirestore.instance.collection('SantriCollection');
 
     QuerySnapshot snapshot =
-        await users.orderBy('id', descending: true).limit(1).get();
+        await users.orderBy('tglMasuk', descending: true).limit(1).get();
     if (snapshot.docs.isEmpty) {
       return 0;
     }
-    int currentId = int.parse(snapshot.docs.first.id);
-    return currentId;
+    String currentId = snapshot.docs.first.id;
+
+    currentId = currentId.substring(6);
+    currentId.replaceAll("TEST", "");
+    // print(int.parse(currentId));
+
+    print(int.parse(currentId));
+    return int.parse(currentId);
   }
 }

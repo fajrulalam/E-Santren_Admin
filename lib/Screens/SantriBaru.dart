@@ -39,6 +39,7 @@ class _SantiBaru_MainPageState extends State<SantiBaru_MainPage> {
     alamatController = TextEditingController();
     waliSantriController = TextEditingController();
     noHPController = TextEditingController();
+    Future<int> currentID = SantriBaru.getCurrentId();
   }
 
   @override
